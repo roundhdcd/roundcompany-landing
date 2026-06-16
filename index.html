@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>라운드컴퍼니 — 블로그·플레이스·숏폼·당근 마케팅 대행</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<style>
+:root{
+  --bg:#07101A;--bg2:#0B1926;--card:rgba(255,255,255,.035);
+  --teal:#00B8CC;--teal2:#00D4EC;--lime:#B8F000;
+  --white:#F4F8FB;--gray:#5A7A90;--gray2:#8AAABB;
+  --border:rgba(0,184,204,.1);--border2:rgba(255,255,255,.05);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal-right.visible{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}
+
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes floatC{0%,100%{transform:translateY(0)}33%{transform:translateY(-8px)}66%{transform:translateY(6px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinR{to{transform:rotate(-360deg)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes popIn{0%{opacity:0;transform:scale(.9) translateY(6px)}100%{opacity:1;transform:none}}
+@keyframes countIn{from{opacity:0}to{opacity:1}}
+@keyframes floatTag{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;transition:.3s}
+.nav.scrolled{background:rgba(7,16,26,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:17px;font-weight:900;letter-spacing:.04em;color:var(--white)}
+.nav-logo em{color:var(--teal);font-style:normal}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:13px;color:var(--gray2);text-decoration:none;transition:.2s;letter-spacing:.01em}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{border:1px solid var(--teal);color:var(--teal);font-size:13px;font-weight:700;padding:9px 22px;border-radius:4px;text-decoration:none;transition:.2s;letter-spacing:.02em}
+.nav-cta:hover{background:var(--teal);color:#040C15}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:120px 10% 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.2}
+.b1{width:700px;height:700px;background:radial-gradient(circle,#00B8CC,transparent 70%);top:-200px;right:-100px;animation:floatA 12s ease-in-out infinite}
+.b2{width:400px;height:400px;background:radial-gradient(circle,#B8F000,transparent 70%);bottom:-100px;left:5%;animation:floatC 10s ease-in-out infinite 2s;opacity:.1}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,184,204,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,184,204,.025) 1px,transparent 1px);background-size:80px 80px}
+.hero-content{position:relative;z-index:1;max-width:720px}
+.hero-kicker{font-size:12px;font-weight:700;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.hero-kicker::before{content:"";width:32px;height:1px;background:var(--teal)}
+.hero-title{font-size:clamp(36px,6vw,76px);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:24px;min-height:2.3em}
+.hero-title .cursor{display:inline-block;width:3px;height:.85em;background:var(--teal);margin-left:4px;vertical-align:middle;animation:blink 1s infinite}
+.hero-title .hl{color:var(--teal)}
+.hero-desc{font-size:clamp(15px,1.8vw,18px);color:var(--gray2);line-height:1.9;margin-bottom:44px;max-width:480px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:72px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#040C15;font-size:14px;font-weight:800;padding:15px 34px;border-radius:4px;text-decoration:none;letter-spacing:.02em;transition:.25s}
+.btn-primary:hover{background:var(--teal2);transform:translateY(-2px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);color:var(--gray2);font-size:14px;font-weight:600;padding:14px 30px;border-radius:4px;text-decoration:none;transition:.25s}
+.btn-ghost:hover{border-color:rgba(0,184,204,.4);color:var(--white)}
+.hero-stats{display:flex;gap:52px;flex-wrap:wrap}
+.h-stat .n{font-size:36px;font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--white)}
+.h-stat .n em{color:var(--teal);font-style:normal}
+.h-stat .l{font-size:11px;color:var(--gray);margin-top:6px;letter-spacing:.06em;text-transform:uppercase}
+.hero-stat-divider{width:1px;height:40px;background:var(--border);align-self:center}
+
+/* TRUST BAR */
+.trust-bar{background:rgba(0,184,204,.05);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 10%;display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--gray2);letter-spacing:.04em;white-space:nowrap}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.trust-item strong{color:var(--white);font-weight:700}
+
+/* MARQUEE */
+.marquee-wrap{padding:18px 0;background:rgba(0,0,0,.2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);overflow:hidden;white-space:nowrap}
+.marquee-inner{display:inline-flex;animation:marquee 36s linear infinite}
+.marquee-inner:hover{animation-play-state:paused}
+.marquee-item{display:inline-flex;align-items:center;gap:14px;padding:0 36px;font-size:12px;font-weight:600;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
+.marquee-item strong{color:var(--gray2)}
+.marquee-sep{width:3px;height:3px;border-radius:50%;background:var(--teal);opacity:.5}
+
+/* SECTION */
+section{padding:100px 10%}
+.sec-inner{max-width:1080px;margin:0 auto}
+.sec-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.sec-label::before{content:"";width:20px;height:1px;background:var(--teal)}
+.sec-title{font-size:clamp(26px,4vw,48px);font-weight:900;line-height:1.15;letter-spacing:-.03em;margin-bottom:14px}
+.sec-sub{font-size:15px;color:var(--gray2);line-height:1.85}
+
+/* PAIN */
+.pain-section{background:var(--bg2);position:relative;overflow:hidden}
+.pain-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,184,204,.3),transparent)}
+.pain-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:72px}
+.pain-visual{position:relative;height:300px;display:flex;align-items:center;justify-content:center}
+.pain-ring{width:190px;height:190px;border-radius:50%;border:1px solid rgba(0,184,204,.15);display:flex;align-items:center;justify-content:center;position:relative}
+.pain-ring::before{content:"";position:absolute;inset:-20px;border-radius:50%;border:1px dashed rgba(0,184,204,.1);animation:spin 24s linear infinite}
+.pain-ring::after{content:"";position:absolute;inset:-40px;border-radius:50%;border:1px dashed rgba(184,240,0,.07);animation:spinR 32s linear infinite}
+.pain-center{font-size:13px;font-weight:800;color:var(--teal);letter-spacing:.06em;text-align:center;line-height:1.5}
+.pain-tags{position:absolute;display:flex;flex-direction:column;gap:10px}
+.pain-tags.left{left:0;align-items:flex-start}
+.pain-tags.right{right:0;align-items:flex-end}
+.pain-tag{background:rgba(255,255,255,.04);border:1px solid var(--border2);backdrop-filter:blur(10px);border-radius:3px;padding:8px 14px;font-size:12px;color:var(--gray2);white-space:nowrap;animation:floatTag 8s ease-in-out infinite}
+.pain-tag:nth-child(2){animation-delay:.7s}.pain-tag:nth-child(3){animation-delay:1.4s}
+.pain-tag.active{background:rgba(0,184,204,.08);border-color:rgba(0,184,204,.25);color:var(--teal)}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden}
+.pain-card{background:var(--bg2);padding:32px 28px;transition:.25s;cursor:default}
+.pain-card:hover{background:rgba(0,184,204,.04)}
+.pain-q{font-size:17px;font-weight:800;color:var(--white);line-height:1.5;margin-bottom:10px;letter-spacing:-.01em}
+.pain-q::before{content:'"';color:rgba(0,184,204,.4);font-size:28px;line-height:0;vertical-align:-.35em;margin-right:3px}
+.pain-a{font-size:13px;color:var(--gray2);line-height:1.75;padding-top:10px;border-top:1px solid var(--border2)}
+
+/* CASE STUDY */
+.case-section{position:relative}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:52px}
+.case-card{background:var(--bg);padding:32px 28px;transition:.25s;position:relative}
+.case-card:hover{background:rgba(0,184,204,.03)}
+.case-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--lime));opacity:0;transition:.25s}
+.case-card:hover::before{opacity:1}
+.case-platform{font-size:10px;font-weight:800;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.case-biz{font-size:12px;color:var(--gray);margin-bottom:16px;line-height:1.5}
+.case-nums{display:flex;align-items:flex-end;gap:10px;margin-bottom:10px}
+.case-from{font-size:22px;font-weight:700;color:var(--gray);text-decoration:line-through;opacity:.5;line-height:1}
+.case-arrow{font-size:14px;color:var(--gray);margin-bottom:2px}
+.case-to{font-size:52px;font-weight:900;color:var(--lime);line-height:1;letter-spacing:-.04em}
+.case-unit{font-size:12px;color:var(--teal);font-weight:700;letter-spacing:.04em;margin-bottom:8px}
+.case-period{font-size:11px;color:var(--gray);letter-spacing:.02em}
+
+/* REVIEW */
+.review-section{background:var(--bg2);position:relative}
+.review-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,240,0,.2),transparent)}
+.review-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:52px}
+.review-col{background:var(--bg2);padding:36px 32px}
+.review-stars{font-size:13px;color:#FFCB00;letter-spacing:.12em;margin-bottom:16px}
+.review-text{font-size:15px;color:var(--white);line-height:1.8;font-weight:500;margin-bottom:20px}
+.review-text::before{content:'"';color:rgba(0,184,204,.35);font-size:40px;line-height:0;vertical-align:-.4em;margin-right:6px}
+.review-meta{font-size:12px;color:var(--gray);letter-spacing:.03em;border-top:1px solid var(--border2);padding-top:16px}
+.review-img-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:1px}
+.review-img-cell{background:var(--bg2);padding:24px}
+.review-img-placeholder{aspect-ratio:4/3;background:rgba(0,184,204,.03);border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed rgba(0,184,204,.12)}
+.review-img-placeholder .ph-label{font-size:11px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
+.review-img-label{font-size:11px;color:var(--gray);margin-top:10px;letter-spacing:.03em}
+
+/* SERVICES */
+.svc-section{position:relative}
+.svc-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,184,204,.3),transparent)}
+.svc-tabs{display:flex;gap:0;margin:40px 0 0;border:1px solid var(--border2);border-radius:4px;overflow:hidden}
+.svc-tab{background:transparent;border:none;border-right:1px solid var(--border2);padding:14px 22px;font-size:13px;font-weight:700;color:var(--gray);cursor:pointer;transition:.2s;letter-spacing:.02em;white-space:nowrap;font-family:Pretendard,sans-serif}
+.svc-tab:last-child{border-right:none}
+.svc-tab.active{background:rgba(0,184,204,.08);color:var(--teal)}
+.svc-tab:hover:not(.active){background:rgba(255,255,255,.03);color:var(--gray2)}
+.svc-panel{display:none;animation:popIn .35s cubic-bezier(.22,1,.36,1);margin-top:0;border:1px solid var(--border2);border-top:none;border-radius:0 0 4px 4px;overflow:hidden}
+.svc-panel.active{display:grid;grid-template-columns:1fr 1fr}
+.svc-text{padding:48px 40px;border-right:1px solid var(--border2)}
+.svc-kicker{font-size:10px;font-weight:800;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.svc-text h3{font-size:clamp(22px,2.8vw,36px);font-weight:900;line-height:1.2;letter-spacing:-.03em;margin-bottom:14px}
+.svc-text h3 em{font-style:normal;color:var(--teal)}
+.svc-text .desc{font-size:14px;color:var(--gray2);line-height:1.85;margin-bottom:28px}
+.svc-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.svc-feat{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray2);line-height:1.65}
+.svc-feat::before{content:"";width:14px;height:1px;background:var(--teal);flex-shrink:0;margin-top:10px}
+.svc-price-row{display:flex;align-items:baseline;gap:8px;padding:18px 20px;background:rgba(0,184,204,.05);border:1px solid var(--border);border-radius:3px}
+.svc-price-amount{font-size:26px;font-weight:900;color:var(--lime);letter-spacing:-.02em}
+.svc-price-note{font-size:12px;color:var(--gray)}
+.svc-visual{padding:48px 40px;background:rgba(0,0,0,.15)}
+.svc-card-label{font-size:10px;font-weight:800;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
+.svc-big-num{font-size:clamp(52px,6vw,80px);font-weight:900;color:var(--teal);line-height:1;letter-spacing:-.04em;margin-bottom:6px}
+.svc-big-label{font-size:12px;color:var(--gray);letter-spacing:.04em;margin-bottom:28px}
+.bar-row{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.bar-label{font-size:11px;color:var(--gray);width:68px;flex-shrink:0;letter-spacing:.02em}
+.bar-track{flex:1;height:6px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--teal),var(--lime));width:0;transition:width 1.3s cubic-bezier(.22,1,.36,1)}
+.bar-fill.animated{width:var(--w)}
+.bar-val{font-size:11px;color:var(--teal);font-weight:700;width:40px;text-align:right}
+.svc-float{position:absolute;background:rgba(7,16,26,.9);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:3px;padding:10px 16px;font-size:11px;font-weight:700;color:var(--gray2);white-space:nowrap;animation:floatTag 7s ease-in-out infinite;letter-spacing:.02em}
+.svc-float .fn{color:var(--teal);font-size:18px;font-weight:900;display:block;line-height:1;margin-bottom:2px}
+
+/* PRICING */
+.pricing-section{background:var(--bg2);position:relative}
+.pricing-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,184,204,.3),transparent)}
+.price-cats{display:flex;gap:0;margin:40px 0 0;border:1px solid var(--border2);border-radius:4px;overflow:hidden}
+.price-cat-btn{background:transparent;border:none;border-right:1px solid var(--border2);padding:12px 24px;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:.2s;letter-spacing:.06em;text-transform:uppercase;font-family:Pretendard,sans-serif}
+.price-cat-btn:last-child{border-right:none}
+.price-cat-btn.active{background:rgba(184,240,0,.06);color:var(--lime)}
+.price-cat-btn:hover:not(.active){background:rgba(255,255,255,.03);color:var(--gray2)}
+.price-grid{display:none;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-top:none;border-radius:0 0 4px 4px;overflow:hidden;animation:popIn .35s ease}
+.price-grid.active{display:grid}
+.price-card{background:var(--bg2);padding:32px 28px;position:relative;transition:.25s}
+.price-card:hover{background:rgba(0,184,204,.03)}
+.price-card.featured{background:rgba(0,184,204,.05)}
+.price-card.featured::after{content:"추천";position:absolute;top:20px;right:20px;background:var(--teal);color:#040C15;font-size:10px;font-weight:900;padding:3px 10px;border-radius:2px;letter-spacing:.06em}
+.price-platform{font-size:10px;font-weight:800;color:var(--gray);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.price-name{font-size:16px;font-weight:900;margin-bottom:6px;letter-spacing:-.01em}
+.price-desc{font-size:12px;color:var(--gray2);line-height:1.7;margin-bottom:20px;border-bottom:1px solid var(--border2);padding-bottom:20px}
+.price-val{font-size:30px;font-weight:900;color:var(--lime);letter-spacing:-.02em;line-height:1}
+.price-val span{font-size:13px;color:var(--gray);font-weight:400;margin-left:4px}
+.price-list{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.price-list li{font-size:12px;color:var(--gray2);list-style:none;display:flex;gap:8px;align-items:flex-start}
+.price-list li::before{content:"—";color:rgba(0,184,204,.4);flex-shrink:0;font-size:10px;margin-top:2px}
+
+/* STATS */
+.stats-section{text-align:center;position:relative;overflow:hidden}
+.stats-section::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,184,204,.04),transparent 70%)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:56px}
+.stat-item{background:var(--bg2);padding:48px 20px;text-align:center;transition:.25s}
+.stat-item:hover{background:rgba(0,184,204,.04)}
+.stat-n{font-size:clamp(40px,5vw,64px);font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--white)}
+.stat-n em{color:var(--teal);font-style:normal}
+.stat-l{font-size:11px;color:var(--gray);margin-top:10px;letter-spacing:.08em;text-transform:uppercase}
+
+/* WHY */
+.why-section{background:var(--bg2);position:relative}
+.why-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,240,0,.2),transparent)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:52px}
+.why-card{background:var(--bg2);padding:40px 32px;transition:.3s;position:relative;overflow:hidden}
+.why-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--lime));transform:scaleX(0);transform-origin:left;transition:.4s}
+.why-card:hover::before{transform:scaleX(1)}
+.why-card:hover{background:rgba(0,184,204,.03)}
+.why-num{font-size:44px;font-weight:900;color:rgba(0,184,204,.07);line-height:1;margin-bottom:20px;letter-spacing:-.04em}
+.why-title{font-size:17px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
+.why-desc{font-size:13px;color:var(--gray2);line-height:1.85}
+
+/* BRANDS */
+.brands-section{position:relative}
+.brands-inner{margin-top:40px;display:flex;flex-direction:column;gap:24px}
+.brands-row-wrap{}
+.brands-cat{font-size:10px;font-weight:700;color:var(--gray);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.brands-row{display:flex;flex-wrap:wrap;gap:8px}
+.brand-chip{background:var(--card);border:1px solid var(--border2);border-radius:3px;padding:7px 16px;font-size:13px;color:var(--gray2);transition:.2s;letter-spacing:.01em}
+.brand-chip:hover{border-color:rgba(0,184,204,.3);color:var(--white)}
+
+/* PROCESS */
+.process-section{background:var(--bg2);position:relative}
+.process-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,184,204,.3),transparent)}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:52px}
+.proc-item{background:var(--bg2);padding:36px 28px;transition:.25s}
+.proc-item:hover{background:rgba(0,184,204,.03)}
+.proc-step{font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.proc-step::before{content:"";width:20px;height:1px;background:var(--teal)}
+.proc-title{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
+.proc-desc{font-size:12px;color:var(--gray);line-height:1.75}
+
+/* CTA */
+.cta-section{padding:120px 10%;text-align:left;position:relative;overflow:hidden}
+.cta-section::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,184,204,.06),transparent 60%)}
+.cta-inner{position:relative;z-index:1;max-width:700px}
+.cta-kicker{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.cta-kicker::before{content:"";width:20px;height:1px;background:var(--teal)}
+.cta-title{font-size:clamp(30px,5vw,58px);font-weight:900;line-height:1.15;letter-spacing:-.04em;margin-bottom:18px}
+.cta-title em{color:var(--teal);font-style:normal}
+.cta-sub{font-size:15px;color:var(--gray2);margin-bottom:12px;line-height:1.85}
+.cta-contact{font-size:13px;color:var(--gray);margin-bottom:40px;letter-spacing:.02em}
+.cta-contact a{color:var(--teal);text-decoration:none}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-kakao{display:inline-flex;align-items:center;gap:8px;background:#FEE500;color:#3C1E1E;font-size:14px;font-weight:800;padding:16px 36px;border-radius:4px;text-decoration:none;letter-spacing:.02em;transition:.25s}
+.btn-kakao:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(254,229,0,.3)}
+.btn-tel{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);color:var(--gray2);font-size:14px;font-weight:600;padding:15px 32px;border-radius:4px;text-decoration:none;transition:.25s}
+.btn-tel:hover{border-color:rgba(0,184,204,.4);color:var(--white)}
+
+/* FLOAT CTA */
+.float-cta{position:fixed;bottom:28px;right:28px;z-index:999;background:#FEE500;color:#3C1E1E;font-size:12px;font-weight:800;padding:13px 22px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:.25s;letter-spacing:.02em}
+.float-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(254,229,0,.3)}
+
+/* FOOTER */
+footer{padding:40px 10%;border-top:1px solid var(--border2)}
+footer p{font-size:12px;color:var(--gray);line-height:2;letter-spacing:.02em}
+footer a{color:var(--teal);text-decoration:none}
+
+/* MOBILE */
+@media(max-width:760px){
+  .nav{padding:0 20px}.nav-links{display:none}
+  .hero{padding:120px 6% 80px}
+  .trust-bar{display:none}
+  section{padding:80px 6%}
+  .pain-header{grid-template-columns:1fr}.pain-visual{display:none}
+  .pain-grid,.case-grid,.review-img-row,.process-grid,.why-grid,.stats-grid{grid-template-columns:1fr}
+  .svc-panel.active{grid-template-columns:1fr}
+  .svc-text{border-right:none;border-bottom:1px solid var(--border2)}
+  .price-grid.active{grid-template-columns:1fr}
+  .review-layout{grid-template-columns:1fr}
+  .hero-stats{gap:28px}.hero-stat-divider{display:none}
+  .cta-btns{flex-direction:column}
+  .cta-section{padding:80px 6%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">ROUND<em>.</em></div>
+  <div class="nav-links">
+    <a href="#pain">문제 진단</a>
+    <a href="#result">성과</a>
+    <a href="#service">서비스</a>
+    <a href="#pricing">가격</a>
+    <a href="#kakao">무료 상담</a>
+  </div>
+  <a href="#kakao" class="nav-cta">무료 상담</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-kicker reveal">블로그 · 플레이스 · 숏폼 · 당근마켓 마케팅 대행</div>
+    <h1 class="hero-title reveal d1" id="heroTitle"></h1>
+    <p class="hero-desc reveal d2">열심히 하는데 왜 옆 가게만 잘 될까요.<br>검색 첫 화면을 점령하는 방법이 있습니다.</p>
+    <div class="hero-actions reveal d3">
+      <a href="https://open.kakao.com/o/roundco" target="_blank" class="btn-primary">카카오톡 무료 진단</a>
+      <a href="#service" class="btn-ghost">서비스 보기</a>
+    </div>
+    <div class="hero-stats reveal d4">
+      <div class="h-stat"><div class="n"><em>200</em>+</div><div class="l">누적 고수</div></div>
+      <div class="hero-stat-divider"></div>
+      <div class="h-stat"><div class="n"><em>92</em>%</div><div class="l">재계약률</div></div>
+      <div class="hero-stat-divider"></div>
+      <div class="h-stat"><div class="n"><em>4</em>년+</div><div class="l">운영 경력</div></div>
+      <div class="hero-stat-divider"></div>
+      <div class="h-stat"><div class="n"><em>5.0</em></div><div class="l">구글 평점</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><div class="trust-dot"></div><strong>네이버 플레이스</strong> 1위 달성</div>
+  <div class="trust-item"><div class="trust-dot"></div>블로그 월 <strong>2,190건</strong> 조회</div>
+  <div class="trust-item"><div class="trust-dot"></div>재계약률 <strong>92%</strong></div>
+  <div class="trust-item"><div class="trust-dot"></div>구글 평점 <strong>5.0</strong></div>
+  <div class="trust-item"><div class="trust-dot"></div>카카오톡 <strong>roundco</strong></div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item"><strong>블로그 상위 노출</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">네이버 플레이스 1위<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>재계약률 92%</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">구글 평점 5.0<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>당근마켓 바이럴</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">광고 ROAS 400%+<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>인스타 릴스 제작</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">유튜브 컨텐츠 제작<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>누적 고수 200+</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">1:1 전담 관리<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>블로그 상위 노출</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">네이버 플레이스 1위<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>재계약률 92%</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">구글 평점 5.0<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>당근마켓 바이럴</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">광고 ROAS 400%+<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>인스타 릴스 제작</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">유튜브 컨텐츠 제작<span class="marquee-sep"></span></span>
+    <span class="marquee-item"><strong>누적 고수 200+</strong><span class="marquee-sep"></span></span>
+    <span class="marquee-item">1:1 전담 관리<span class="marquee-sep"></span></span>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section class="pain-section" id="pain">
+<div class="sec-inner">
+  <div class="pain-header">
+    <div class="reveal-left">
+      <div class="sec-label">현황 진단</div>
+      <h2 class="sec-title">이런 상황이<br>반복되고 있진 않나요.</h2>
+      <p class="sec-sub" style="margin-top:14px">안 되는 건 노력 부족이 아닙니다.<br>검색 구조가 문제입니다.</p>
+    </div>
+    <div class="pain-visual reveal-right">
+      <div class="pain-tags left">
+        <div class="pain-tag active">왜 나만 안 되지?</div>
+        <div class="pain-tag">광고비만 나가</div>
+        <div class="pain-tag active">블로그 해야 하는데</div>
+      </div>
+      <div class="pain-ring"><div class="pain-center">검색<br>노출</div></div>
+      <div class="pain-tags right">
+        <div class="pain-tag">옆 가게는 맨 위에</div>
+        <div class="pain-tag active">시간이 없어</div>
+        <div class="pain-tag">손님이 줄었어</div>
+      </div>
+    </div>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-card reveal d1">
+      <div class="pain-q">열심히 하는데 왜 나만 안 되지?</div>
+      <div class="pain-a">문제는 노력이 아닙니다. 검색 노출 구조가 문제입니다.</div>
+    </div>
+    <div class="pain-card reveal d2">
+      <div class="pain-q">옆 가게는 검색하면 항상 위에 있어</div>
+      <div class="pain-a">누군가 꾸준히 관리하고 있는 겁니다.</div>
+    </div>
+    <div class="pain-card reveal d3">
+      <div class="pain-q">광고비는 쓰는데 문의가 안 와</div>
+      <div class="pain-a">광고 전에 블로그·플레이스 기반이 먼저입니다.</div>
+    </div>
+    <div class="pain-card reveal d1">
+      <div class="pain-q">블로그 해야 한다는 건 아는데</div>
+      <div class="pain-a">어디서부터 어떻게 할지 몰라서 못 하는 거예요.</div>
+    </div>
+    <div class="pain-card reveal d2">
+      <div class="pain-q">손님이 줄었어. 마케팅이 문제인가?</div>
+      <div class="pain-a">검색에서 밀리면 손님도 자연히 줄어듭니다.</div>
+    </div>
+    <div class="pain-card reveal d3">
+      <div class="pain-q">직접 하기엔 시간이 없고</div>
+      <div class="pain-a">본업에 집중하세요. 검색은 저희가 담당합니다.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CASE STUDY -->
+<section id="result">
+<div class="sec-inner">
+  <div class="reveal">
+    <div class="sec-label">실제 성과</div>
+    <h2 class="sec-title">숫자로 증명합니다</h2>
+    <p class="sec-sub">실제 고객사의 검색 순위 및 조회수 변화 데이터입니다.</p>
+  </div>
+  <div class="case-grid">
+    <div class="case-card reveal d1">
+      <div class="case-platform">플레이스</div>
+      <div class="case-biz">음식점 · 네이버 플레이스</div>
+      <div class="case-nums"><div class="case-from">12위</div><div class="case-arrow">→</div><div class="case-to">1위</div></div>
+      <div class="case-unit">플레이스 순위</div>
+      <div class="case-period">12일 만에 달성 · 월간 검색량 1,910건</div>
+    </div>
+    <div class="case-card reveal d2">
+      <div class="case-platform">플레이스</div>
+      <div class="case-biz">비뇨기과 3곳 · 네이버 플레이스</div>
+      <div class="case-nums"><div class="case-to" style="font-size:40px">1위</div></div>
+      <div class="case-unit">대전 · 세종 · 강남 동시</div>
+      <div class="case-period">3개 지역 플레이스 1위 유지 중</div>
+    </div>
+    <div class="case-card reveal d3">
+      <div class="case-platform">블로그</div>
+      <div class="case-biz">병원 · 네이버 블로그</div>
+      <div class="case-nums"><div class="case-from">50건</div><div class="case-arrow">→</div><div class="case-to">2,190</div></div>
+      <div class="case-unit">월간 조회수</div>
+      <div class="case-period">2026년 3월 기준</div>
+    </div>
+    <div class="case-card reveal d1">
+      <div class="case-platform">플레이스</div>
+      <div class="case-biz">대전 정형외과 · 네이버 플레이스</div>
+      <div class="case-nums"><div class="case-to" style="font-size:40px">1위</div></div>
+      <div class="case-unit">플레이스 순위</div>
+      <div class="case-period">월 블 1,536개 · 업체 320개 중</div>
+    </div>
+    <div class="case-card reveal d2">
+      <div class="case-platform">블로그 · 카페</div>
+      <div class="case-biz">서초 신경과</div>
+      <div class="case-nums"><div class="case-to" style="font-size:36px;line-height:1.2">상위<br>노출</div></div>
+      <div class="case-unit">카페·블로그 탭 첫 화면</div>
+      <div class="case-period">"서초 신경과" 키워드 점령</div>
+    </div>
+    <div class="case-card reveal d3">
+      <div class="case-platform">인스타그램</div>
+      <div class="case-biz">브랜드 계정 · 인스타그램</div>
+      <div class="case-nums"><div class="case-from">0</div><div class="case-arrow">→</div><div class="case-to">1만+</div></div>
+      <div class="case-unit">조회수</div>
+      <div class="case-period">한 달 만에 달성</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="review-section">
+<div class="sec-inner">
+  <div class="reveal">
+    <div class="sec-label">고객 후기</div>
+    <h2 class="sec-title">함께한 고객들의<br>이야기입니다</h2>
+  </div>
+  <div class="review-layout">
+    <div class="review-col reveal d1">
+      <div class="review-stars">★ ★ ★ ★ ★</div>
+      <div class="review-text">마케팅에 잘 모르셨을 때부터 지금까지 친절하게 도와주셔서 감사합니다. 덕분에 플레이스 순위가 눈에 띄게 올랐어요.</div>
+      <div class="review-meta">플레이스 대행 고객</div>
+    </div>
+    <div class="review-col reveal d2">
+      <div class="review-stars">★ ★ ★ ★ ★</div>
+      <div class="review-text">저의 요청에 성실하게 응해주시고 빠르게 처리해주셔서 너무 만족스럽습니다. 처음엔 반신반의했는데 한 달 만에 검색 순위가 바뀌는 걸 보고 놀랐습니다.</div>
+      <div class="review-meta">블로그+플레이스 대행 고객</div>
+    </div>
+  </div>
+  <div class="review-img-row" style="margin-top:1px">
+    <div class="review-img-cell reveal d1">
+      <div class="review-img-placeholder"><div class="ph-label">카카오톡 후기 예정</div></div>
+      <div class="review-img-label">플레이스 대행 · 병원</div>
+    </div>
+    <div class="review-img-cell reveal d2">
+      <div class="review-img-placeholder"><div class="ph-label">카카오톡 후기 예정</div></div>
+      <div class="review-img-label">블로그 대행 · 음식점</div>
+    </div>
+    <div class="review-img-cell reveal d3">
+      <div class="review-img-placeholder"><div class="ph-label">카카오톡 후기 예정</div></div>
+      <div class="review-img-label">숏폼 제작 · 뷰티샵</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section class="svc-section" id="service">
+<div class="sec-inner">
+  <div class="reveal">
+    <div class="sec-label">서비스</div>
+    <h2 class="sec-title">당신의 브랜드를<br>더 크게, 더 가깝게</h2>
+    <p class="sec-sub">검색부터 SNS까지, 고객이 찾아오는 경로를 모두 점령합니다.</p>
+  </div>
+  <div class="svc-tabs reveal">
+    <button class="svc-tab active" data-tab="blog">블로그</button>
+    <button class="svc-tab" data-tab="place">플레이스</button>
+    <button class="svc-tab" data-tab="cafe">카페 바이럴</button>
+    <button class="svc-tab" data-tab="sns">SNS · 릴스</button>
+    <button class="svc-tab" data-tab="carrot">당근마켓</button>
+  </div>
+
+  <!-- 블로그 -->
+  <div class="svc-panel active" id="tab-blog">
+    <div class="svc-text">
+      <div class="svc-kicker">네이버 블로그</div>
+      <h3>손님이 <em>블로그 보고 왔어요</em> 라고<br>말하게 됩니다.</h3>
+      <p class="desc">파워블로거 운영으로 키워드 SEO를 최적화합니다.<br>검색에 걸리는 글을 꾸준히 발행해 드립니다.</p>
+      <div class="svc-features">
+        <div class="svc-feat">파워블로거 운영 · 키워드 SEO 최적화</div>
+        <div class="svc-feat">업종 맞춤 키워드 정밀 공략</div>
+        <div class="svc-feat">브랜드 블로그 관리대행 (월 단위)</div>
+        <div class="svc-feat">월간 성과 리포트</div>
+      </div>
+      <div class="svc-price-row">
+        <div class="svc-price-amount">250,000</div>
+        <div class="svc-price-note">원~ (5건) · VAT 별도<br>브랜드 블로그 관리 200,000원~/월</div>
+      </div>
+    </div>
+    <div class="svc-visual">
+      <div class="svc-card-label">블로그 조회수 변화 (실제)</div>
+      <div class="svc-big-num">2,190</div>
+      <div class="svc-big-label">월간 조회수 · 2026년 3월</div>
+      <div class="bar-row"><div class="bar-label">대행 전</div><div class="bar-track"><div class="bar-fill" style="--w:4%;background:rgba(255,255,255,.1)"></div></div><div class="bar-val" style="color:var(--gray)">50건</div></div>
+      <div class="bar-row"><div class="bar-label">1개월</div><div class="bar-track"><div class="bar-fill" style="--w:25%"></div></div><div class="bar-val">545건</div></div>
+      <div class="bar-row"><div class="bar-label">3개월</div><div class="bar-track"><div class="bar-fill" style="--w:97%"></div></div><div class="bar-val">2,190건</div></div>
+    </div>
+  </div>
+
+  <!-- 플레이스 -->
+  <div class="svc-panel" id="tab-place">
+    <div class="svc-text">
+      <div class="svc-kicker">네이버 플레이스</div>
+      <h3>지도에서 검색하면<br><em>내 가게가 제일 먼저</em> 뜹니다.</h3>
+      <p class="desc">플레이스 최적화, 상위노출, 체험단 운영 및 정보관리.<br>노출 순위 전환 추적과 컨텐츠 운영까지 담당합니다.</p>
+      <div class="svc-features">
+        <div class="svc-feat">플레이스 최적화 · 상위 노출 전략</div>
+        <div class="svc-feat">체험단 운영 및 정보 관리</div>
+        <div class="svc-feat">노출 순위 전환 추적 리포트</div>
+        <div class="svc-feat">경쟁사 키워드 분석 적용</div>
+      </div>
+      <div class="svc-price-row">
+        <div class="svc-price-amount">300,000</div>
+        <div class="svc-price-note">원~/월 · VAT 별도<br>3개월 550,000원~ · 6개월 1,000,000원~</div>
+      </div>
+    </div>
+    <div class="svc-visual" style="position:relative">
+      <div class="svc-card-label">플레이스 순위 변화 (실제)</div>
+      <div class="svc-big-num">1위</div>
+      <div class="svc-big-label">12일 만에 달성</div>
+      <div class="bar-row"><div class="bar-label">대행 전</div><div class="bar-track"><div class="bar-fill" style="--w:4%;background:rgba(255,255,255,.1)"></div></div><div class="bar-val" style="color:var(--gray)">288위</div></div>
+      <div class="bar-row"><div class="bar-label">1개월</div><div class="bar-track"><div class="bar-fill" style="--w:55%"></div></div><div class="bar-val">13위</div></div>
+      <div class="bar-row"><div class="bar-label">12일</div><div class="bar-track"><div class="bar-fill" style="--w:97%"></div></div><div class="bar-val">1위</div></div>
+    </div>
+  </div>
+
+  <!-- 카페 -->
+  <div class="svc-panel" id="tab-cafe">
+    <div class="svc-text">
+      <div class="svc-kicker">네이버 카페 바이럴</div>
+      <h3>지역 커뮤니티에서<br><em>자연스럽게 퍼지는</em><br>입소문을 만듭니다.</h3>
+      <p class="desc">지역 카페, 맘카페, 커뮤니티에 바이럴 게시글을 발행합니다.<br>광고 없이 신뢰도 높은 후기로 노출됩니다.</p>
+      <div class="svc-features">
+        <div class="svc-feat">지역 카페 · 맘카페 · 커뮤니티 선별</div>
+        <div class="svc-feat">자연스러운 후기형 글 작성</div>
+        <div class="svc-feat">네이버 카페 탭 상위 노출</div>
+        <div class="svc-feat">5건 기준 패키지 운영</div>
+      </div>
+      <div class="svc-price-row">
+        <div class="svc-price-amount">200,000</div>
+        <div class="svc-price-note">원~ (5건) · VAT 별도</div>
+      </div>
+    </div>
+    <div class="svc-visual">
+      <div class="svc-card-label">카페 탭 노출 효과</div>
+      <div class="svc-big-num" style="font-size:52px">카페 탭<br>1위</div>
+      <div class="svc-big-label" style="margin-top:8px">발행 후 검색 탭 점령</div>
+    </div>
+  </div>
+
+  <!-- SNS -->
+  <div class="svc-panel" id="tab-sns">
+    <div class="svc-text">
+      <div class="svc-kicker">SNS · 릴스 · 유튜브</div>
+      <h3>30초 영상 하나가<br><em>블로그 100개보다</em><br>빠릅니다.</h3>
+      <p class="desc">인스타그램 릴스, 스레드, 유튜브 컨텐츠를 제작합니다.<br>영상소스는 계약업체에서 직접 제공합니다.</p>
+      <div class="svc-features">
+        <div class="svc-feat">인스타그램 릴스 제작 (트렌드 타깃 최적화)</div>
+        <div class="svc-feat">스레드 운영 (일상글 + 해시태그 최적화)</div>
+        <div class="svc-feat">유튜브 쇼츠 기획 및 제작</div>
+        <div class="svc-feat">팔로워 소통 유도 · 성과 분석</div>
+      </div>
+      <div class="svc-price-row">
+        <div class="svc-price-amount">80,000</div>
+        <div class="svc-price-note">원~/건 (릴스) · 5건 400,000원~<br>스레드 20,000원~/건 · 유튜브 100,000원~/건</div>
+      </div>
+    </div>
+    <div class="svc-visual">
+      <div class="svc-card-label">인스타그램 조회수 (실제)</div>
+      <div class="svc-big-num">1만+</div>
+      <div class="svc-big-label">한 달 만에 달성한 조회수</div>
+      <div class="bar-row"><div class="bar-label">8월</div><div class="bar-track"><div class="bar-fill" style="--w:3%;background:rgba(255,255,255,.1)"></div></div><div class="bar-val" style="color:var(--gray)">0</div></div>
+      <div class="bar-row"><div class="bar-label">9월</div><div class="bar-track"><div class="bar-fill" style="--w:97%"></div></div><div class="bar-val">1만+</div></div>
+    </div>
+  </div>
+
+  <!-- 당근 -->
+  <div class="svc-panel" id="tab-carrot">
+    <div class="svc-text">
+      <div class="svc-kicker">당근마켓</div>
+      <h3>동네 주민이<br><em>우리 가게를 먼저</em><br>찾게 됩니다.</h3>
+      <p class="desc">당근마켓 키워드 운영, 홍보 컨텐츠, 로컬 광고 관리.<br>참여율 평균 225% 상승.</p>
+      <div class="svc-features">
+        <div class="svc-feat">비즈프로필 후기 · 동네생활 게시글</div>
+        <div class="svc-feat">소식글 관심 · 단골맞기 · 찜하기</div>
+        <div class="svc-feat">로컬 광고 운영 관리</div>
+        <div class="svc-feat">참여율 225%+ 달성</div>
+      </div>
+      <div class="svc-price-row">
+        <div class="svc-price-amount">200,000</div>
+        <div class="svc-price-note">원 (A패키지) · B 350,000원 · C 550,000원</div>
+      </div>
+    </div>
+    <div class="svc-visual">
+      <div class="svc-card-label">당근 A패키지 구성</div>
+      <div class="svc-big-num">225%</div>
+      <div class="svc-big-label">평균 참여율 증가</div>
+      <div class="price-list" style="margin-top:20px">
+        <li>비즈프로필 후기 5건</li>
+        <li>동네생활 게시글 1건</li>
+        <li>소식글 관심 50건</li>
+        <li>단골맞기 100건 · 찜하기 100건</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+<div class="sec-inner">
+  <div class="reveal">
+    <div class="sec-label">가격 안내</div>
+    <h2 class="sec-title">투명하게<br>공개합니다</h2>
+    <p class="sec-sub">무료 상담 후 최종 견적 확정 · 플랫폼별 맞춤 전략 제안<br>VAT 별도 · 게시 건수·계약 기간에 따라 견적 조정 가능</p>
+  </div>
+  <div class="price-cats reveal">
+    <button class="price-cat-btn active" data-pcat="naver">네이버</button>
+    <button class="price-cat-btn" data-pcat="sns">SNS</button>
+    <button class="price-cat-btn" data-pcat="carrot">당근마켓</button>
+  </div>
+  <div class="price-grid active" id="pcat-naver">
+    <div class="price-card reveal d1">
+      <div class="price-platform">네이버 카페</div>
+      <div class="price-name">카페 바이럴</div>
+      <div class="price-desc">지역 카페 · 맘카페 · 커뮤니티 바이럴 게시 · 5건 기준</div>
+      <div class="price-val">200,000<span>원~</span></div>
+      <ul class="price-list"><li>지역 선별 커뮤니티 발행</li><li>자연스러운 후기형 작성</li><li>5건 기준 패키지</li></ul>
+    </div>
+    <div class="price-card featured reveal d2">
+      <div class="price-platform">네이버 블로그</div>
+      <div class="price-name">블로그 상위 노출</div>
+      <div class="price-desc">파워블로거 운영 · 키워드 SEO 최적화 · 5건 기준</div>
+      <div class="price-val">250,000<span>원~</span></div>
+      <ul class="price-list"><li>키워드 SEO 최적화</li><li>파워블로거 발행</li><li>월간 성과 리포트</li></ul>
+    </div>
+    <div class="price-card reveal d3">
+      <div class="price-platform">네이버 블로그</div>
+      <div class="price-name">브랜드 블로그 관리</div>
+      <div class="price-desc">브랜드 블로그 운영 · 컨텐츠 기획 및 발행 · 월 단위</div>
+      <div class="price-val">200,000<span>원~/월</span></div>
+      <ul class="price-list"><li>브랜드 블로그 전체 운영</li><li>월 단위 계약</li><li>컨텐츠 기획 포함</li></ul>
+    </div>
+    <div class="price-card reveal d1" style="grid-column:1/-1">
+      <div class="price-platform">네이버 플레이스</div>
+      <div class="price-name">플레이스 관리</div>
+      <div class="price-desc">플레이스 최적화 · 상위노출 · 체험단 운영 및 정보관리 · 노출 순위 전환 추적</div>
+      <div style="display:flex;gap:40px;margin-top:14px;flex-wrap:wrap">
+        <div><div class="price-val">300,000<span>원~</span></div><div style="font-size:11px;color:var(--gray);margin-top:4px;letter-spacing:.03em">1개월</div></div>
+        <div><div class="price-val">550,000<span>원~</span></div><div style="font-size:11px;color:var(--gray);margin-top:4px;letter-spacing:.03em">3개월</div></div>
+        <div><div class="price-val">1,000,000<span>원~</span></div><div style="font-size:11px;color:var(--gray);margin-top:4px;letter-spacing:.03em">6개월</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="price-grid" id="pcat-sns">
+    <div class="price-card featured reveal d1">
+      <div class="price-platform">인스타그램</div>
+      <div class="price-name">릴스 제작</div>
+      <div class="price-desc">릴스 기획 및 제작 · 인스타 프로필 관리 · 트렌드 타깃 분석 최적화</div>
+      <div class="price-val">80,000<span>원~/건</span></div>
+      <div style="font-size:13px;font-weight:800;color:var(--lime);margin-top:6px">5건 400,000원~</div>
+      <ul class="price-list"><li>릴스 기획·제작</li><li>인스타 프로필 관리</li><li>트렌드 타깃 최적화</li></ul>
+    </div>
+    <div class="price-card reveal d2">
+      <div class="price-platform">스레드</div>
+      <div class="price-name">스레드 운영</div>
+      <div class="price-desc">브랜드 일상 글 작성 · 해시태그 최적화 · 팔로워 소통 유도</div>
+      <div class="price-val">20,000<span>원~/건</span></div>
+      <div style="font-size:13px;font-weight:800;color:var(--lime);margin-top:6px">5건 80,000원~</div>
+      <ul class="price-list"><li>브랜드 일상 글 작성</li><li>해시태그 최적화</li><li>팔로워 소통 유도</li></ul>
+    </div>
+    <div class="price-card reveal d3">
+      <div class="price-platform">유튜브</div>
+      <div class="price-name">유튜브 컨텐츠</div>
+      <div class="price-desc">쇼츠 기획 및 제작 · 성과분석 · 영상소스 계약업체 직접 제공</div>
+      <div class="price-val">100,000<span>원~/건</span></div>
+      <div style="font-size:13px;font-weight:800;color:var(--lime);margin-top:6px">5건 450,000원~</div>
+      <ul class="price-list"><li>쇼츠 기획·제작</li><li>영상소스 직접 제공</li><li>성과 분석</li></ul>
+    </div>
+  </div>
+  <div class="price-grid" id="pcat-carrot">
+    <div class="price-card reveal d1">
+      <div class="price-platform">당근마켓</div>
+      <div class="price-name">A 패키지</div>
+      <div class="price-desc">비즈프로필 후기 5건 · 동네생활 1건 · 소식글 관심 50건 · 단골맞기 100건 · 찜하기 100건</div>
+      <div class="price-val">200,000<span>원</span></div>
+    </div>
+    <div class="price-card featured reveal d2">
+      <div class="price-platform">당근마켓</div>
+      <div class="price-name">B 패키지</div>
+      <div class="price-desc">비즈프로필 후기 7건 · 동네생활 3건 · 소식글 관심 100건 · 단골맞기 200건 · 찜하기 200건 · 쇼츠 1건</div>
+      <div class="price-val">350,000<span>원</span></div>
+    </div>
+    <div class="price-card reveal d3">
+      <div class="price-platform">당근마켓</div>
+      <div class="price-name">C 패키지</div>
+      <div class="price-desc">비즈프로필 후기 10건 · 동네생활 10건 · 소식글 관심 200건 · 단골맞기 500건 · 찜하기 500건 · 쇼츠 2건 · 30일 관리</div>
+      <div class="price-val">550,000<span>원</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+<div class="sec-inner">
+  <div class="reveal" style="text-align:center">
+    <div class="sec-label">라운드컴퍼니</div>
+    <h2 class="sec-title">4년이 만든 숫자</h2>
+  </div>
+  <div class="stats-grid reveal">
+    <div class="stat-item"><div class="stat-n" data-count="200" data-suffix="+">0</div><div class="stat-l">누적 고수</div></div>
+    <div class="stat-item"><div class="stat-n" data-count="92" data-suffix="%">0</div><div class="stat-l">재계약률</div></div>
+    <div class="stat-item"><div class="stat-n" data-count="4" data-suffix="년+">0</div><div class="stat-l">운영 경력</div></div>
+    <div class="stat-item"><div class="stat-n" data-count="5" data-suffix=".0">0</div><div class="stat-l">구글 평점</div></div>
+  </div>
+</div>
+</section>
+
+<!-- WHY -->
+<section class="why-section">
+<div class="sec-inner">
+  <div class="reveal">
+    <div class="sec-label">차별점</div>
+    <h2 class="sec-title">대행사는 많습니다.<br>성과를 내는 곳은 다릅니다.</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal d1">
+      <div class="why-num">01</div>
+      <div class="why-title">데이터 기반 운영</div>
+      <p class="why-desc">라운드컴퍼니만의 독자 노하우로 최신 트렌드를 지속 최적화합니다. 감이 아닌 데이터로 움직입니다.</p>
+    </div>
+    <div class="why-card reveal d2">
+      <div class="why-num">02</div>
+      <div class="why-title">투명한 성과 보고</div>
+      <p class="why-desc">주기적인 성과 보고로 월별 현황을 파악할 수 있습니다. 숫자로 확인하는 운영입니다.</p>
+    </div>
+    <div class="why-card reveal d3">
+      <div class="why-num">03</div>
+      <div class="why-title">맞춤형 전략</div>
+      <p class="why-desc">업종·지역마다 검색 패턴이 다릅니다. 해당 업종에 최적화된 맞춤형 전략을 제안합니다.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands-section">
+<div class="sec-inner">
+  <div class="reveal">
+    <div class="sec-label">함께한 브랜드</div>
+    <h2 class="sec-title">다양한 업종과<br>함께했습니다</h2>
+  </div>
+  <div class="brands-inner reveal">
+    <div class="brands-row-wrap">
+      <div class="brands-cat">F&B · 생활</div>
+      <div class="brands-row"><div class="brand-chip">동양조수</div><div class="brand-chip">공진당</div><div class="brand-chip">사랑애용품</div><div class="brand-chip">ZOO</div></div>
+    </div>
+    <div class="brands-row-wrap">
+      <div class="brands-cat">의료 · 헬스</div>
+      <div class="brands-row"><div class="brand-chip">Capture Pharm Tech</div><div class="brand-chip">Un Detail</div><div class="brand-chip">동행왓</div><div class="brand-chip">한국건강</div><div class="brand-chip">MaRu</div></div>
+    </div>
+    <div class="brands-row-wrap">
+      <div class="brands-cat">교육 · 서비스</div>
+      <div class="brands-row"><div class="brand-chip">KIPP 한국의학</div><div class="brand-chip">고수법연구소</div><div class="brand-chip">Cabriotha</div><div class="brand-chip">JOY</div><div class="brand-chip">QK CLUB</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+<div class="sec-inner">
+  <div class="reveal" style="text-align:left">
+    <div class="sec-label">진행 과정</div>
+    <h2 class="sec-title">맡기면<br>이렇게 됩니다</h2>
+  </div>
+  <div class="process-grid">
+    <div class="proc-item reveal d1"><div class="proc-step">Step 01</div><div class="proc-title">무료 진단</div><p class="proc-desc">현재 검색 순위와 경쟁사 현황을 무료로 분석합니다</p></div>
+    <div class="proc-item reveal d2"><div class="proc-step">Step 02</div><div class="proc-title">전략 수립</div><p class="proc-desc">업종·지역에 맞는 키워드와 운영 계획을 세웁니다</p></div>
+    <div class="proc-item reveal d3"><div class="proc-step">Step 03</div><div class="proc-title">운영 시작</div><p class="proc-desc">계약 후 24시간 내 세팅, 즉시 포스팅이 시작됩니다</p></div>
+    <div class="proc-item reveal d4"><div class="proc-step">Step 04</div><div class="proc-title">성과 리포트</div><p class="proc-desc">매월 순위·문의 현황을 투명하게 공유합니다</p></div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="kakao">
+<div class="cta-inner">
+  <div class="cta-kicker reveal">무료 검색 현황 진단</div>
+  <h2 class="cta-title reveal d1">왜 나만<br><em>검색이 안 되는지</em><br>알아보세요.</h2>
+  <p class="cta-sub reveal d2">지금 내 가게 검색 순위가 어디쯤인지,<br>옆 가게가 왜 위에 뜨는지 바로 분석해 드립니다.</p>
+  <p class="cta-contact reveal d2">전화 <a href="tel:010-8335-7599">010-8335-7599</a> · 카카오톡 <a href="https://open.kakao.com/o/roundco">roundco</a></p>
+  <div class="cta-btns reveal d3">
+    <a href="https://open.kakao.com/o/roundco" target="_blank" class="btn-kakao">카카오톡으로 문의</a>
+    <a href="tel:010-8335-7599" class="btn-tel">전화 문의</a>
+  </div>
+</div>
+</section>
+
+<a href="https://open.kakao.com/o/roundco" target="_blank" class="float-cta">무료 상담</a>
+
+<footer>
+  <p>© 2026 ROUND COMPANY · 블로그·플레이스·SNS·당근마켓 마케팅 대행<br>
+  전화 <a href="tel:010-8335-7599">010-8335-7599</a> · 카카오톡 roundco · <a href="https://roundcompany.kr">roundcompany.kr</a></p>
+</footer>
+
+<script>
+// NAV
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)})
+
+// TYPEWRITER
+const lines=['검색해도 안 나오면,\n없는 가게입니다.','광고비 말고\n매출을 만듭니다.','당신의 브랜드를\n더 크게, 더 가깝게']
+let li=0,ci=0,phase='type'
+const el=document.getElementById('heroTitle')
+function tick(){
+  const line=lines[li]
+  if(phase==='type'){
+    if(ci<=line.length){
+      el.innerHTML=line.slice(0,ci).replace(/\n/g,'<br>')+'<span class="cursor"></span>'
+      ci++;setTimeout(tick,ci===1?400:38)
+    }else{phase='pause';setTimeout(tick,2000)}
+  }else if(phase==='pause'){phase='erase';setTimeout(tick,60)}
+  else{
+    if(ci>0){el.innerHTML=line.slice(0,ci-1).replace(/\n/g,'<br>')+'<span class="cursor"></span>';ci--;setTimeout(tick,24)}
+    else{li=(li+1)%lines.length;phase='type';setTimeout(tick,400)}
+  }
+}
+setTimeout(tick,700)
+
+// REVEAL
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08})
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el))
+
+// BARS
+const barObs=new IntersectionObserver(e=>e.forEach(x=>{
+  if(!x.isIntersecting)return
+  x.target.querySelectorAll('.bar-fill').forEach(b=>b.classList.add('animated'))
+  barObs.unobserve(x.target)
+}),{threshold:.3})
+document.querySelectorAll('.svc-visual,.case-card').forEach(el=>barObs.observe(el))
+
+// COUNTER
+const cntObs=new IntersectionObserver(e=>e.forEach(x=>{
+  if(!x.isIntersecting)return
+  x.target.querySelectorAll('[data-count]').forEach(el=>{
+    const target=+el.dataset.count,suffix=el.dataset.suffix||''
+    let v=0,step=target/60
+    const t=setInterval(()=>{v+=step;if(v>=target){v=target;clearInterval(t)}el.textContent=Math.floor(v)+suffix},16)
+  })
+  cntObs.unobserve(x.target)
+}),{threshold:.5})
+document.querySelectorAll('.stats-grid').forEach(el=>cntObs.observe(el))
+
+// SVC TABS
+document.querySelectorAll('.svc-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.svc-tab,.svc-panel').forEach(x=>x.classList.remove('active'))
+    tab.classList.add('active')
+    const p=document.getElementById('tab-'+tab.dataset.tab)
+    if(p){p.classList.add('active');setTimeout(()=>p.querySelectorAll('.bar-fill').forEach(b=>b.classList.add('animated')),80)}
+  })
+})
+setTimeout(()=>document.getElementById('tab-blog').querySelectorAll('.bar-fill').forEach(b=>b.classList.add('animated')),900)
+
+// PRICE TABS
+document.querySelectorAll('.price-cat-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.price-cat-btn').forEach(b=>b.classList.remove('active'))
+    document.querySelectorAll('.price-grid').forEach(g=>g.classList.remove('active'))
+    btn.classList.add('active')
+    const g=document.getElementById('pcat-'+btn.dataset.pcat)
+    if(g)g.classList.add('active')
+  })
+})
+</script>
+</body>
+</html>
