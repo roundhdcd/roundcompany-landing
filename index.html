@@ -71,9 +71,9 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;padding:0;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.2}
-.b1{width:700px;height:700px;background:radial-gradient(circle,#00B8CC,transparent 70%);top:-200px;right:-100px;animation:floatA 12s ease-in-out infinite}
+.b1{width:700px;height:700px;background:radial-gradient(circle,#0066FF,transparent 70%);top:-200px;right:-100px;animation:floatA 12s ease-in-out infinite}
 .b2{width:400px;height:400px;background:radial-gradient(circle,#B8F000,transparent 70%);bottom:-100px;left:5%;animation:floatC 10s ease-in-out infinite 2s;opacity:.1}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,184,204,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,184,204,.025) 1px,transparent 1px);background-size:80px 80px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,102,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,.03) 1px,transparent 1px);background-size:80px 80px}
 .hero-content{position:relative;z-index:1;max-width:720px;padding:110px 10% 0;flex:1;display:flex;flex-direction:column;justify-content:center}
 .hero-bottom{position:relative;z-index:1;width:100%}
 .hero-kicker{font-size:15px;font-weight:700;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
@@ -359,8 +359,8 @@ section{padding:100px 10%}
 .btn-tel:hover{border-color:rgba(0,184,204,.4);color:var(--white)}
 
 /* FLOAT CTA */
-.float-cta{position:fixed;bottom:28px;right:28px;z-index:999;background:#FEE500;color:#3C1E1E;font-size:12px;font-weight:800;padding:13px 22px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:.25s;letter-spacing:.02em}
-.float-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(254,229,0,.3)}
+.float-cta{position:fixed;bottom:28px;right:28px;z-index:999;background:#FEE500;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 28px rgba(0,0,0,.4);transition:.25s}
+.float-cta:hover{transform:translateY(-3px) scale(1.08);box-shadow:0 12px 36px rgba(254,229,0,.45)}
 
 /* FOOTER */
 footer{padding:40px 10%;border-top:1px solid var(--border2)}
@@ -1016,7 +1016,11 @@ footer a{color:var(--teal);text-decoration:none}
 </div>
 </section>
 
-<a href="https://open.kakao.com/o/roundco" target="_blank" class="float-cta">무료 상담</a>
+<a href="https://open.kakao.com/o/roundco" target="_blank" class="float-cta" title="카카오톡 무료 상담">
+  <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15 2C7.82 2 2 6.925 2 13c0 3.9 2.3 7.34 5.78 9.38l-1.56 5.8 5.4-3.57A16.3 16.3 0 0015 24c7.18 0 13-4.925 13-11S22.18 2 15 2z" fill="#3C1E1E"/>
+  </svg>
+</a>
 
 <footer>
   <p>© 2026 ROUND COMPANY · 블로그·플레이스·SNS·당근마켓 마케팅 대행<br>
