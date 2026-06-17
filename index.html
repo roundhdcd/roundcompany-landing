@@ -285,13 +285,14 @@ section{padding:100px 10%}
 
 /* STATS */
 .stats-section{text-align:center;position:relative;overflow:hidden}
-.stats-section::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,184,204,.04),transparent 70%)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:56px}
-.stat-item{background:var(--bg2);padding:48px 20px;text-align:center;transition:.25s}
-.stat-item:hover{background:rgba(0,184,204,.04)}
-.stat-n{font-size:clamp(40px,5vw,64px);font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--white)}
-.stat-n em{color:var(--teal);font-style:normal}
-.stat-l{font-size:11px;color:var(--gray);margin-top:10px;letter-spacing:.08em;text-transform:uppercase}
+.stats-section::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,102,255,.08),transparent 70%)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--bg2);border:1px solid rgba(0,102,255,.15);border-radius:20px;overflow:hidden;margin-top:52px;box-shadow:0 0 60px rgba(0,102,255,.2),0 0 120px rgba(0,102,255,.1),inset 0 1px 0 rgba(255,255,255,.05)}
+.stat-item{background:transparent;padding:52px 24px;text-align:center;transition:.3s;position:relative}
+.stat-item:not(:last-child)::after{content:"";position:absolute;right:0;top:20%;height:60%;width:1px;background:rgba(0,102,255,.15)}
+.stat-item:hover{background:rgba(0,102,255,.05)}
+.stat-n{font-size:clamp(44px,5.5vw,72px);font-weight:900;line-height:1;letter-spacing:-.04em;background:linear-gradient(135deg,var(--teal) 30%,var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block}
+.stat-n em{font-style:normal}
+.stat-l{font-size:13px;color:var(--gray2);margin-top:12px;letter-spacing:.04em;font-weight:500}
 
 /* WHY */
 .why-section{background:var(--bg2);position:relative}
@@ -1071,10 +1072,17 @@ document.querySelectorAll('.bar-trigger').forEach(b=>{
 // COUNTER
 const cntObs=new IntersectionObserver(e=>e.forEach(x=>{
   if(!x.isIntersecting)return
-  x.target.querySelectorAll('[data-count]').forEach(el=>{
+  x.target.querySelectorAll('[data-count]').forEach((el,i)=>{
     const target=+el.dataset.count,suffix=el.dataset.suffix||''
-    let v=0,step=target/60
-    const t=setInterval(()=>{v+=step;if(v>=target){v=target;clearInterval(t);el.style.animation='glowPulse 2.5s ease-in-out infinite'}el.textContent=Math.floor(v)+suffix},16)
+    setTimeout(()=>{
+      let v=0,step=target/70,ease=1
+      const t=setInterval(()=>{
+        ease=Math.max(.01,ease*.97)
+        v+=step*ease*3
+        if(v>=target){v=target;clearInterval(t)}
+        el.textContent=Math.floor(v)+suffix
+      },16)
+    },i*150)
   })
   cntObs.unobserve(x.target)
 }),{threshold:.5})
