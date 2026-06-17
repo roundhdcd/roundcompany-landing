@@ -75,7 +75,9 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .b2{width:400px;height:400px;background:radial-gradient(circle,#B8F000,transparent 70%);bottom:-100px;left:5%;animation:floatC 10s ease-in-out infinite 2s;opacity:.1}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,102,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,.08) 1px,transparent 1px);background-size:60px 60px;-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.9) 0%,rgba(0,0,0,.5) 60%,transparent 100%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.9) 0%,rgba(0,0,0,.5) 60%,transparent 100%)}
 .hero-grid-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% -5%,rgba(0,102,255,.18) 0%,transparent 55%);pointer-events:none}
-.hero-content{position:relative;z-index:1;max-width:720px;padding:110px 10% 0;flex:1;display:flex;flex-direction:column;justify-content:center}
+.hero-content{position:relative;z-index:1;padding:110px 10% 0;flex:1;display:flex;flex-direction:column;justify-content:center;max-width:none}
+.hero-left-col{display:flex;flex-direction:column;justify-content:center}
+.hero-right-col{display:none}
 .hero-bottom{position:relative;z-index:1;width:100%}
 .hero-kicker{font-size:15px;font-weight:700;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
 .hero-kicker::before{content:"";width:32px;height:1px;background:var(--teal)}
@@ -94,6 +96,63 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .h-stat .n .suf{font-size:.55em;color:var(--gray2);font-weight:700}
 .h-stat .l{font-size:13px;color:var(--gray2);margin-top:8px;letter-spacing:.04em;font-weight:500}
 .hero-stat-divider{width:1px;height:52px;background:var(--border);align-self:center}
+
+/* PC HERO 2-COLUMN */
+@media(min-width:761px){
+  .hero-content{
+    display:grid;
+    grid-template-columns:1fr 420px;
+    gap:80px;
+    align-items:center;
+    padding-top:80px;
+    padding-bottom:60px;
+  }
+  .hero-right-col{display:flex;flex-direction:column;gap:16px}
+  .hero-stats{display:none}
+}
+
+/* STAT CLUSTER CARD */
+.hero-stat-cluster{
+  background:rgba(11,25,38,.8);
+  border:1px solid rgba(0,102,255,.2);
+  border-radius:20px;
+  backdrop-filter:blur(24px);
+  overflow:hidden;
+  box-shadow:0 0 60px rgba(0,102,255,.14),0 24px 80px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07)
+}
+.hstat-header{
+  padding:14px 22px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  font-size:11px;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px
+}
+.hstat-live{width:7px;height:7px;border-radius:50%;background:#00E676;flex-shrink:0;box-shadow:0 0 8px rgba(0,230,118,.7);animation:blink 2s ease-in-out infinite}
+.hstat-row{
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:.2s
+}
+.hstat-row:last-child{border-bottom:none}
+.hstat-row:hover{background:rgba(0,102,255,.06)}
+.hstat-lbl{font-size:13px;color:var(--gray2);letter-spacing:.02em}
+.hstat-num{font-size:26px;font-weight:900;letter-spacing:-.03em;background:linear-gradient(135deg,var(--teal) 30%,var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;min-width:80px;text-align:right}
+
+/* HERO BADGE STRIP */
+.hero-badge-row{display:flex;gap:10px}
+.hero-badge{
+  flex:1;
+  background:rgba(0,102,255,.07);
+  border:1px solid rgba(0,102,255,.18);
+  border-radius:12px;
+  padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+  font-size:12px;color:var(--gray2);font-weight:600;
+  transition:.25s
+}
+.hero-badge:hover{background:rgba(0,102,255,.12);border-color:rgba(0,102,255,.3)}
+.hero-badge-icon{font-size:22px;flex-shrink:0}
+.hero-badge strong{display:block;font-size:13px;color:var(--white);margin-bottom:1px}
 
 /* TRUST BAR */
 .trust-bar{background:rgba(0,184,204,.05);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 10%;display:flex;align-items:center;gap:40px;flex-wrap:wrap}
@@ -439,7 +498,9 @@ footer a{color:var(--teal);text-decoration:none}
 /* MOBILE */
 @media(max-width:760px){
   .nav{padding:0 20px}.nav-links{display:none}
-  .hero{padding:120px 6% 80px}
+  .hero-content{padding:100px 6% 0;grid-template-columns:1fr}
+  .hero-right-col{display:none!important}
+  .hero-stats{display:flex!important}
   .trust-bar{display:none}
   section{padding:80px 6%}
   .pain-header{grid-template-columns:1fr}.pain-visual{display:none}
@@ -484,21 +545,55 @@ footer a{color:var(--teal);text-decoration:none}
     <div class="hero-grid-glow"></div>
   </div>
   <div class="hero-content">
-    <div class="hero-kicker reveal">블로그 · 플레이스 · 숏폼 · 당근마켓 마케팅 대행</div>
-    <h1 class="hero-title reveal d1" id="heroTitle"></h1>
-    <p class="hero-desc reveal d2">열심히 하는데 왜 옆 가게만 잘 될까요.<br>검색 첫 화면을 점령하는 방법이 있습니다.</p>
-    <div class="hero-actions reveal d3">
-      <a href="https://open.kakao.com/o/roundco" target="_blank" class="btn-primary">카카오톡 무료 진단</a>
-      <a href="#service" class="btn-ghost">서비스 보기</a>
+    <!-- LEFT: text + CTA -->
+    <div class="hero-left-col">
+      <div class="hero-kicker reveal">블로그 · 플레이스 · 숏폼 · 당근마켓 마케팅 대행</div>
+      <h1 class="hero-title reveal d1" id="heroTitle"></h1>
+      <p class="hero-desc reveal d2">열심히 하는데 왜 옆 가게만 잘 될까요.<br>검색 첫 화면을 점령하는 방법이 있습니다.</p>
+      <div class="hero-actions reveal d3">
+        <a href="https://open.kakao.com/o/roundco" target="_blank" class="btn-primary">카카오톡 무료 진단</a>
+        <a href="#service" class="btn-ghost">서비스 보기</a>
+      </div>
+      <!-- mobile only stats -->
+      <div class="hero-stats reveal d4">
+        <div class="h-stat"><div class="n"><em class="hcnt" data-count="200" data-suffix="">0</em><span class="suf">+</span></div><div class="l">누적 고객</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="h-stat"><div class="n"><em class="hcnt" data-count="92" data-suffix="">0</em><span class="suf">%</span></div><div class="l">재계약률</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="h-stat"><div class="n"><em class="hcnt" data-count="5" data-suffix=".0">0</em></div><div class="l">구글 평점</div></div>
+      </div>
     </div>
-    <div class="hero-stats reveal d4">
-      <div class="h-stat"><div class="n"><em class="hcnt" data-count="200" data-suffix="">0</em><span class="suf">+</span></div><div class="l">누적 고수</div></div>
-      <div class="hero-stat-divider"></div>
-      <div class="h-stat"><div class="n"><em class="hcnt" data-count="92" data-suffix="">0</em><span class="suf">%</span></div><div class="l">재계약률</div></div>
-      <div class="hero-stat-divider"></div>
-      <div class="h-stat"><div class="n"><em class="hcnt" data-count="4" data-suffix="">0</em><span class="suf">년+</span></div><div class="l">운영 경력</div></div>
-      <div class="hero-stat-divider"></div>
-      <div class="h-stat"><div class="n"><em class="hcnt" data-count="5" data-suffix=".0">0</em></div><div class="l">구글 평점</div></div>
+    <!-- RIGHT: stat cluster (PC only) -->
+    <div class="hero-right-col">
+      <div class="hero-stat-cluster reveal d2">
+        <div class="hstat-header"><span class="hstat-live"></span>라운드컴퍼니 성과 현황</div>
+        <div class="hstat-row">
+          <span class="hstat-lbl">누적 관리 업체</span>
+          <span class="hstat-num"><em class="hcnt" data-count="200" data-suffix="+">0+</em></span>
+        </div>
+        <div class="hstat-row">
+          <span class="hstat-lbl">재계약률</span>
+          <span class="hstat-num"><em class="hcnt" data-count="92" data-suffix="%">0%</em></span>
+        </div>
+        <div class="hstat-row">
+          <span class="hstat-lbl">운영 경력</span>
+          <span class="hstat-num">4년+</span>
+        </div>
+        <div class="hstat-row">
+          <span class="hstat-lbl">구글 평점</span>
+          <span class="hstat-num">★ 5.0</span>
+        </div>
+      </div>
+      <div class="hero-badge-row reveal d3">
+        <div class="hero-badge">
+          <span class="hero-badge-icon">📍</span>
+          <div><strong>네이버 플레이스 1위</strong>12일 만에 달성</div>
+        </div>
+        <div class="hero-badge">
+          <span class="hero-badge-icon">📝</span>
+          <div><strong>블로그 2,190건</strong>월간 조회수</div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="hero-bottom">
