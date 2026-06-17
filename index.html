@@ -87,11 +87,12 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .btn-primary:hover{background:var(--teal2);transform:translateY(-2px)}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);color:var(--gray2);font-size:14px;font-weight:600;padding:14px 30px;border-radius:4px;text-decoration:none;transition:.25s}
 .btn-ghost:hover{border-color:rgba(0,184,204,.4);color:var(--white)}
-.hero-stats{display:flex;gap:52px;flex-wrap:wrap}
-.h-stat .n{font-size:36px;font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--white)}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;align-items:flex-end}
+.h-stat .n{font-size:clamp(44px,4.5vw,64px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--white)}
 .h-stat .n em{color:var(--teal);font-style:normal}
-.h-stat .l{font-size:11px;color:var(--gray);margin-top:6px;letter-spacing:.06em;text-transform:uppercase}
-.hero-stat-divider{width:1px;height:40px;background:var(--border);align-self:center}
+.h-stat .n .suf{font-size:.55em;color:var(--gray2);font-weight:700}
+.h-stat .l{font-size:13px;color:var(--gray2);margin-top:8px;letter-spacing:.04em;font-weight:500}
+.hero-stat-divider{width:1px;height:52px;background:var(--border);align-self:center}
 
 /* TRUST BAR */
 .trust-bar{background:rgba(0,184,204,.05);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 10%;display:flex;align-items:center;gap:40px;flex-wrap:wrap}
@@ -419,13 +420,13 @@ footer a{color:var(--teal);text-decoration:none}
       <a href="#service" class="btn-ghost">서비스 보기</a>
     </div>
     <div class="hero-stats reveal d4">
-      <div class="h-stat"><div class="n"><em>200</em>+</div><div class="l">누적 고수</div></div>
+      <div class="h-stat"><div class="n"><em class="hcnt" data-count="200" data-suffix="">0</em><span class="suf">+</span></div><div class="l">누적 고수</div></div>
       <div class="hero-stat-divider"></div>
-      <div class="h-stat"><div class="n"><em>92</em>%</div><div class="l">재계약률</div></div>
+      <div class="h-stat"><div class="n"><em class="hcnt" data-count="92" data-suffix="">0</em><span class="suf">%</span></div><div class="l">재계약률</div></div>
       <div class="hero-stat-divider"></div>
-      <div class="h-stat"><div class="n"><em>4</em>년+</div><div class="l">운영 경력</div></div>
+      <div class="h-stat"><div class="n"><em class="hcnt" data-count="4" data-suffix="">0</em><span class="suf">년+</span></div><div class="l">운영 경력</div></div>
       <div class="hero-stat-divider"></div>
-      <div class="h-stat"><div class="n"><em>5.0</em></div><div class="l">구글 평점</div></div>
+      <div class="h-stat"><div class="n"><em class="hcnt" data-count="5" data-suffix=".0">0</em></div><div class="l">구글 평점</div></div>
     </div>
   </div>
   <div class="hero-bottom">
@@ -1072,6 +1073,19 @@ const cntObs=new IntersectionObserver(e=>e.forEach(x=>{
   cntObs.unobserve(x.target)
 }),{threshold:.5})
 document.querySelectorAll('.stats-grid').forEach(el=>cntObs.observe(el))
+
+// HERO COUNTER (fires on page load after reveal)
+setTimeout(()=>{
+  document.querySelectorAll('.hcnt').forEach(el=>{
+    const target=+el.dataset.count,suffix=el.dataset.suffix||''
+    let v=0,step=target/50
+    const t=setInterval(()=>{
+      v+=step
+      if(v>=target){v=target;clearInterval(t);el.style.animation='glowPulse 2.5s ease-in-out infinite'}
+      el.textContent=Math.floor(v)+suffix
+    },20)
+  })
+},1200)
 
 // SVC TABS
 document.querySelectorAll('.svc-tab').forEach(tab=>{
