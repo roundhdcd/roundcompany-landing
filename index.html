@@ -73,7 +73,8 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.2}
 .b1{width:700px;height:700px;background:radial-gradient(circle,#0066FF,transparent 70%);top:-200px;right:-100px;animation:floatA 12s ease-in-out infinite}
 .b2{width:400px;height:400px;background:radial-gradient(circle,#B8F000,transparent 70%);bottom:-100px;left:5%;animation:floatC 10s ease-in-out infinite 2s;opacity:.1}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,102,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,.03) 1px,transparent 1px);background-size:80px 80px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,102,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,.08) 1px,transparent 1px);background-size:60px 60px;-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.9) 0%,rgba(0,0,0,.5) 60%,transparent 100%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.9) 0%,rgba(0,0,0,.5) 60%,transparent 100%)}
+.hero-grid-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% -5%,rgba(0,102,255,.18) 0%,transparent 55%);pointer-events:none}
 .hero-content{position:relative;z-index:1;max-width:720px;padding:110px 10% 0;flex:1;display:flex;flex-direction:column;justify-content:center}
 .hero-bottom{position:relative;z-index:1;width:100%}
 .hero-kicker{font-size:15px;font-weight:700;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
@@ -335,14 +336,16 @@ section{padding:100px 10%}
 
 /* PROCESS */
 .process-section{background:var(--bg2);position:relative}
-.process-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,184,204,.3),transparent)}
-.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:52px}
-.proc-item{background:var(--bg2);padding:36px 28px;transition:.25s}
-.proc-item:hover{background:rgba(0,184,204,.03)}
-.proc-step{font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.proc-step::before{content:"";width:20px;height:1px;background:var(--teal)}
-.proc-title{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
-.proc-desc{font-size:12px;color:var(--gray);line-height:1.75}
+.process-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,102,255,.3),transparent)}
+.process-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;position:relative}
+/* gradient connecting line */
+.process-timeline::before{content:"";position:absolute;top:36px;left:calc(12.5%);right:calc(12.5%);height:2px;background:linear-gradient(90deg,var(--teal),var(--lime));z-index:0}
+.proc-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px 0;position:relative;z-index:1}
+.proc-circle{width:72px;height:72px;border-radius:50%;border:2px solid var(--teal);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:var(--teal);margin-bottom:28px;box-shadow:0 0 0 6px var(--bg2),0 0 24px rgba(0,102,255,.3);transition:.3s;flex-shrink:0}
+.proc-item:hover .proc-circle{background:rgba(0,102,255,.12);box-shadow:0 0 0 6px var(--bg2),0 0 40px rgba(0,102,255,.5);transform:scale(1.05)}
+.proc-item:last-child .proc-circle{border-color:var(--lime);color:var(--lime);box-shadow:0 0 0 6px var(--bg2),0 0 24px rgba(184,240,0,.25)}
+.proc-title{font-size:16px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
+.proc-desc{font-size:13px;color:var(--gray2);line-height:1.75}
 
 /* CTA */
 .cta-section{padding:120px 10%;text-align:left;position:relative;overflow:hidden}
@@ -370,6 +373,69 @@ footer{padding:40px 10%;border-top:1px solid var(--border2)}
 footer p{font-size:12px;color:var(--gray);line-height:2;letter-spacing:.02em}
 footer a{color:var(--teal);text-decoration:none}
 
+/* === HORIZONTAL CAROUSEL === */
+@keyframes scrollLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes scrollRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.h-scroll-outer{position:relative;overflow:hidden;margin-top:52px}
+.h-scroll-outer::before,.h-scroll-outer::after{content:"";position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
+.h-scroll-outer::before{left:0;background:linear-gradient(to right,var(--fade-bg,var(--bg)),transparent)}
+.h-scroll-outer::after{right:0;background:linear-gradient(to left,var(--fade-bg,var(--bg)),transparent)}
+.h-scroll-track{display:flex;gap:24px;padding:16px 0;width:max-content;animation:scrollLeft 44s linear infinite}
+.h-scroll-track.rdir{animation:scrollRight 40s linear infinite}
+.h-scroll-outer:hover .h-scroll-track{animation-play-state:paused}
+
+/* === WHITE REVIEW CARD (carousel) === */
+.rc-card{flex-shrink:0;width:360px;background:#FFFFFF;padding:32px 32px 28px;border-radius:20px 20px 20px 4px;box-shadow:0 12px 48px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.05);position:relative;transition:.3s;cursor:default}
+.rc-card:hover{transform:translateY(-4px);box-shadow:0 20px 64px rgba(0,0,0,.5)}
+.rc-card::after{content:"";position:absolute;bottom:-12px;left:24px;width:0;height:0;border:12px solid transparent;border-top:12px solid #FFFFFF;border-bottom:0}
+.rc-card.flip{border-radius:20px 20px 4px 20px}
+.rc-card.flip::after{left:auto;right:24px}
+.rc-stars{font-size:17px;color:#FFCB00;letter-spacing:.08em;margin-bottom:14px}
+.rc-q{font-size:44px;font-weight:900;color:var(--teal);line-height:.8;display:block;margin-bottom:10px}
+.rc-text{font-size:15px;color:#1A1A2E;line-height:1.85;font-weight:500;margin-bottom:18px}
+.rc-meta{font-size:12px;color:#555;font-weight:700;border-top:2px solid rgba(0,102,255,.1);padding-top:12px;letter-spacing:.01em}
+
+/* === CASE STUDY CAROUSEL CARD === */
+.cs-scroll-card{flex-shrink:0;width:290px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:28px 24px;position:relative;overflow:hidden;transition:.3s;cursor:default}
+.cs-scroll-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--lime));transform:scaleX(0);transform-origin:left;transition:.3s}
+.cs-scroll-card:hover{transform:translateY(-3px);background:rgba(0,102,255,.06)}
+.cs-scroll-card:hover::before{transform:scaleX(1)}
+
+/* === LINE GRAPH CARDS === */
+.graph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:24px}
+.graph-cell{background:var(--bg);padding:32px 28px;position:relative;overflow:hidden;transition:.25s}
+.graph-cell::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--lime));opacity:0;transition:.3s}
+.graph-cell:hover::before{opacity:1}
+.graph-cell:hover{background:rgba(0,102,255,.03)}
+.gc-cat{font-size:10px;font-weight:800;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+.gc-biz{font-size:13px;color:var(--gray2);font-weight:600;margin-bottom:14px}
+.gc-nums{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.gc-from{font-size:16px;font-weight:700;color:var(--gray);text-decoration:line-through;opacity:.5}
+.gc-arrow{font-size:13px;color:var(--gray);margin:0 4px}
+.gc-to{font-size:48px;font-weight:900;color:var(--teal);line-height:1;letter-spacing:-.04em}
+.gc-unit{font-size:12px;color:var(--gray2);font-weight:600;margin-bottom:16px;letter-spacing:.02em}
+.gc-svg{width:100%;height:84px;overflow:visible;display:block}
+.gc-line{stroke:var(--teal);stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 1.6s cubic-bezier(.22,1,.36,1)}
+.gc-fill{opacity:0;transition:opacity .8s ease .4s}
+.gc-dot-s,.gc-dot-e{fill:var(--teal);opacity:0;transition:opacity .3s ease 1.4s}
+.gc-line.anim{stroke-dashoffset:0}
+.gc-fill.anim{opacity:1}
+.gc-dot-s.anim,.gc-dot-e.anim{opacity:1}
+.gc-period{font-size:11px;color:var(--gray);margin-top:10px;letter-spacing:.02em}
+
+/* === DARK TESTIMONIAL CARDS === */
+.rdark-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:28px}
+.rdark-card{background:var(--bg2);padding:40px 32px;position:relative;overflow:hidden;transition:.3s;cursor:default}
+.rdark-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--lime));transform:scaleX(0);transform-origin:left;transition:.4s}
+.rdark-card:hover::before{transform:scaleX(1)}
+.rdark-card:hover{background:rgba(0,102,255,.05)}
+.rdark-stars{font-size:18px;color:#FFCB00;letter-spacing:.08em;margin-bottom:18px}
+.rdark-q{font-size:52px;font-weight:900;color:rgba(0,102,255,.2);line-height:.8;display:block;margin-bottom:12px}
+.rdark-text{font-size:15px;color:var(--white);line-height:1.9;font-weight:500;margin-bottom:24px}
+.rdark-divider{height:1px;background:rgba(255,255,255,.07);margin-bottom:14px}
+.rdark-name{font-size:14px;font-weight:800;color:var(--white);margin-bottom:3px;letter-spacing:-.01em}
+.rdark-type{font-size:12px;color:var(--gray2);letter-spacing:.04em}
+
 /* MOBILE */
 @media(max-width:760px){
   .nav{padding:0 20px}.nav-links{display:none}
@@ -390,6 +456,8 @@ footer a{color:var(--teal);text-decoration:none}
   .hero-stats{gap:28px}.hero-stat-divider{display:none}
   .cta-btns{flex-direction:column}
   .cta-section{padding:80px 6%}
+  .rdark-grid,.graph-grid{grid-template-columns:1fr}
+  .h-scroll-outer::before,.h-scroll-outer::after{width:40px}
 }
 </style>
 </head>
@@ -413,6 +481,7 @@ footer a{color:var(--teal);text-decoration:none}
   <div class="hero-bg">
     <div class="blob b1"></div><div class="blob b2"></div>
     <div class="hero-grid"></div>
+    <div class="hero-grid-glow"></div>
   </div>
   <div class="hero-content">
     <div class="hero-kicker reveal">블로그 · 플레이스 · 숏폼 · 당근마켓 마케팅 대행</div>
@@ -627,48 +696,176 @@ footer a{color:var(--teal);text-decoration:none}
     <h2 class="sec-title">숫자로 증명합니다</h2>
     <p class="sec-sub">실제 고객사의 검색 순위 및 조회수 변화 데이터입니다.</p>
   </div>
-  <div class="case-grid">
-    <div class="case-card reveal d1">
-      <div class="case-platform">플레이스</div>
-      <div class="case-biz">음식점 · 네이버 플레이스</div>
-      <div class="case-nums"><div class="case-from">12위</div><div class="case-arrow">→</div><div class="case-to">1위</div></div>
-      <div class="case-unit">플레이스 순위</div>
-      <div class="case-period">12일 만에 달성 · 월간 검색량 1,910건</div>
+
+  <!-- Horizontal carousel -->
+  <div class="h-scroll-outer" style="--fade-bg:#07101A">
+    <div class="h-scroll-track">
+      <div class="cs-scroll-card">
+        <div class="case-platform">플레이스</div>
+        <div class="case-biz">음식점 · 네이버 플레이스</div>
+        <div class="case-nums"><div class="case-from">12위</div><div class="case-arrow">→</div><div class="case-to">1위</div></div>
+        <div class="case-unit">플레이스 순위</div>
+        <div class="case-period">12일 만에 달성 · 검색량 1,910건</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">플레이스</div>
+        <div class="case-biz">비뇨기과 3곳 · 네이버 플레이스</div>
+        <div class="case-nums"><div class="case-to" style="font-size:40px">1위</div></div>
+        <div class="case-unit">대전 · 세종 · 강남 동시</div>
+        <div class="case-period">3개 지역 플레이스 1위 유지 중</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">블로그</div>
+        <div class="case-biz">병원 · 네이버 블로그</div>
+        <div class="case-nums"><div class="case-from">50건</div><div class="case-arrow">→</div><div class="case-to">2,190</div></div>
+        <div class="case-unit">월간 조회수</div>
+        <div class="case-period">2026년 3월 기준</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">플레이스</div>
+        <div class="case-biz">대전 정형외과 · 네이버 플레이스</div>
+        <div class="case-nums"><div class="case-to" style="font-size:40px">1위</div></div>
+        <div class="case-unit">플레이스 순위</div>
+        <div class="case-period">월 블 1,536개 · 업체 320개 중</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">블로그 · 카페</div>
+        <div class="case-biz">서초 신경과</div>
+        <div class="case-nums"><div class="case-to" style="font-size:34px;line-height:1.2">상위<br>노출</div></div>
+        <div class="case-unit">카페·블로그 탭 첫 화면</div>
+        <div class="case-period">"서초 신경과" 키워드 점령</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">인스타그램</div>
+        <div class="case-biz">브랜드 계정 · 인스타그램</div>
+        <div class="case-nums"><div class="case-from">0</div><div class="case-arrow">→</div><div class="case-to">1만+</div></div>
+        <div class="case-unit">조회수</div>
+        <div class="case-period">한 달 만에 달성</div>
+      </div>
+      <!-- duplicate for seamless loop -->
+      <div class="cs-scroll-card">
+        <div class="case-platform">플레이스</div>
+        <div class="case-biz">음식점 · 네이버 플레이스</div>
+        <div class="case-nums"><div class="case-from">12위</div><div class="case-arrow">→</div><div class="case-to">1위</div></div>
+        <div class="case-unit">플레이스 순위</div>
+        <div class="case-period">12일 만에 달성 · 검색량 1,910건</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">플레이스</div>
+        <div class="case-biz">비뇨기과 3곳 · 네이버 플레이스</div>
+        <div class="case-nums"><div class="case-to" style="font-size:40px">1위</div></div>
+        <div class="case-unit">대전 · 세종 · 강남 동시</div>
+        <div class="case-period">3개 지역 플레이스 1위 유지 중</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">블로그</div>
+        <div class="case-biz">병원 · 네이버 블로그</div>
+        <div class="case-nums"><div class="case-from">50건</div><div class="case-arrow">→</div><div class="case-to">2,190</div></div>
+        <div class="case-unit">월간 조회수</div>
+        <div class="case-period">2026년 3월 기준</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">플레이스</div>
+        <div class="case-biz">대전 정형외과 · 네이버 플레이스</div>
+        <div class="case-nums"><div class="case-to" style="font-size:40px">1위</div></div>
+        <div class="case-unit">플레이스 순위</div>
+        <div class="case-period">월 블 1,536개 · 업체 320개 중</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">블로그 · 카페</div>
+        <div class="case-biz">서초 신경과</div>
+        <div class="case-nums"><div class="case-to" style="font-size:34px;line-height:1.2">상위<br>노출</div></div>
+        <div class="case-unit">카페·블로그 탭 첫 화면</div>
+        <div class="case-period">"서초 신경과" 키워드 점령</div>
+      </div>
+      <div class="cs-scroll-card">
+        <div class="case-platform">인스타그램</div>
+        <div class="case-biz">브랜드 계정 · 인스타그램</div>
+        <div class="case-nums"><div class="case-from">0</div><div class="case-arrow">→</div><div class="case-to">1만+</div></div>
+        <div class="case-unit">조회수</div>
+        <div class="case-period">한 달 만에 달성</div>
+      </div>
     </div>
-    <div class="case-card reveal d2">
-      <div class="case-platform">플레이스</div>
-      <div class="case-biz">비뇨기과 3곳 · 네이버 플레이스</div>
-      <div class="case-nums"><div class="case-to" style="font-size:40px">1위</div></div>
-      <div class="case-unit">대전 · 세종 · 강남 동시</div>
-      <div class="case-period">3개 지역 플레이스 1위 유지 중</div>
+  </div>
+
+  <!-- LINE GRAPH section -->
+  <div class="reveal" style="margin-top:64px">
+    <div class="sec-label">신규 문의 증가</div>
+    <h3 style="font-size:clamp(20px,2.5vw,30px);font-weight:900;letter-spacing:-.03em;line-height:1.2;margin-bottom:6px">상담·문의가 이렇게<br>늘었습니다</h3>
+    <p style="font-size:14px;color:var(--gray2);margin-top:8px">실제 대행 고객사 신규 문의 건수 변화</p>
+  </div>
+  <div class="graph-grid">
+    <!-- 헬스장 -->
+    <div class="graph-cell">
+      <div class="gc-cat">당근마켓</div>
+      <div class="gc-biz">헬스장 · 지역 신규 문의</div>
+      <div class="gc-nums">
+        <span class="gc-from">25명</span>
+        <span class="gc-arrow">→</span>
+        <span class="gc-to">115</span>
+      </div>
+      <div class="gc-unit">명 / 월</div>
+      <svg class="gc-svg" viewBox="0 0 240 80" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="gcGrad1" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0066FF" stop-opacity=".35"/>
+            <stop offset="100%" stop-color="#0066FF" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path class="gc-fill" d="M 0,72 C 60,71 110,55 160,28 S 220,5 240,3 L 240,80 L 0,80 Z" fill="url(#gcGrad1)"/>
+        <path class="gc-line" d="M 0,72 C 60,71 110,55 160,28 S 220,5 240,3"/>
+        <circle class="gc-dot-s" cx="0" cy="72" r="4"/>
+        <circle class="gc-dot-e" cx="240" cy="3" r="5"/>
+      </svg>
+      <div class="gc-period">대행 후 3개월 기준</div>
     </div>
-    <div class="case-card reveal d3">
-      <div class="case-platform">블로그</div>
-      <div class="case-biz">병원 · 네이버 블로그</div>
-      <div class="case-nums"><div class="case-from">50건</div><div class="case-arrow">→</div><div class="case-to">2,190</div></div>
-      <div class="case-unit">월간 조회수</div>
-      <div class="case-period">2026년 3월 기준</div>
+    <!-- 사주 -->
+    <div class="graph-cell">
+      <div class="gc-cat">블로그</div>
+      <div class="gc-biz">사주·타로 · 온라인 예약</div>
+      <div class="gc-nums">
+        <span class="gc-from">7명</span>
+        <span class="gc-arrow">→</span>
+        <span class="gc-to">145</span>
+      </div>
+      <div class="gc-unit">명 / 월</div>
+      <svg class="gc-svg" viewBox="0 0 240 80" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="gcGrad2" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0066FF" stop-opacity=".35"/>
+            <stop offset="100%" stop-color="#0066FF" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path class="gc-fill" d="M 0,75 C 50,74 90,62 140,35 S 210,3 240,2 L 240,80 L 0,80 Z" fill="url(#gcGrad2)"/>
+        <path class="gc-line" d="M 0,75 C 50,74 90,62 140,35 S 210,3 240,2"/>
+        <circle class="gc-dot-s" cx="0" cy="75" r="4"/>
+        <circle class="gc-dot-e" cx="240" cy="2" r="5"/>
+      </svg>
+      <div class="gc-period">대행 후 3개월 기준</div>
     </div>
-    <div class="case-card reveal d1">
-      <div class="case-platform">플레이스</div>
-      <div class="case-biz">대전 정형외과 · 네이버 플레이스</div>
-      <div class="case-nums"><div class="case-to" style="font-size:40px">1위</div></div>
-      <div class="case-unit">플레이스 순위</div>
-      <div class="case-period">월 블 1,536개 · 업체 320개 중</div>
-    </div>
-    <div class="case-card reveal d2">
-      <div class="case-platform">블로그 · 카페</div>
-      <div class="case-biz">서초 신경과</div>
-      <div class="case-nums"><div class="case-to" style="font-size:36px;line-height:1.2">상위<br>노출</div></div>
-      <div class="case-unit">카페·블로그 탭 첫 화면</div>
-      <div class="case-period">"서초 신경과" 키워드 점령</div>
-    </div>
-    <div class="case-card reveal d3">
-      <div class="case-platform">인스타그램</div>
-      <div class="case-biz">브랜드 계정 · 인스타그램</div>
-      <div class="case-nums"><div class="case-from">0</div><div class="case-arrow">→</div><div class="case-to">1만+</div></div>
-      <div class="case-unit">조회수</div>
-      <div class="case-period">한 달 만에 달성</div>
+    <!-- 입주청소 -->
+    <div class="graph-cell">
+      <div class="gc-cat">플레이스</div>
+      <div class="gc-biz">입주청소 · 신규 견적 문의</div>
+      <div class="gc-nums">
+        <span class="gc-from">20명</span>
+        <span class="gc-arrow">→</span>
+        <span class="gc-to">79</span>
+      </div>
+      <div class="gc-unit">명 / 월</div>
+      <svg class="gc-svg" viewBox="0 0 240 80" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="gcGrad3" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0066FF" stop-opacity=".35"/>
+            <stop offset="100%" stop-color="#0066FF" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path class="gc-fill" d="M 0,72 C 70,70 130,52 180,24 S 225,6 240,5 L 240,80 L 0,80 Z" fill="url(#gcGrad3)"/>
+        <path class="gc-line" d="M 0,72 C 70,70 130,52 180,24 S 225,6 240,5"/>
+        <circle class="gc-dot-s" cx="0" cy="72" r="4"/>
+        <circle class="gc-dot-e" cx="240" cy="5" r="5"/>
+      </svg>
+      <div class="gc-period">대행 후 3개월 기준</div>
     </div>
   </div>
 </div>
@@ -681,32 +878,99 @@ footer a{color:var(--teal);text-decoration:none}
     <div class="sec-label">고객 후기</div>
     <h2 class="sec-title">함께한 고객들의<br>이야기입니다</h2>
   </div>
-  <div class="review-layout">
-    <div class="review-col reveal d1">
-      <div class="review-stars">★ ★ ★ ★ ★</div>
-      <span class="review-quote">"</span>
-      <div class="review-text">마케팅에 잘 모르셨을 때부터 지금까지 친절하게 도와주셔서 감사합니다. 덕분에 플레이스 순위가 눈에 띄게 올랐어요.</div>
-      <div class="review-meta">플레이스 대행 고객</div>
-    </div>
-    <div class="review-col reveal d2">
-      <div class="review-stars">★ ★ ★ ★ ★</div>
-      <span class="review-quote">"</span>
-      <div class="review-text">저의 요청에 성실하게 응해주시고 빠르게 처리해주셔서 너무 만족스럽습니다. 처음엔 반신반의했는데 한 달 만에 검색 순위가 바뀌는 걸 보고 놀랐습니다.</div>
-      <div class="review-meta">블로그+플레이스 대행 고객</div>
+
+  <!-- White card carousel -->
+  <div class="h-scroll-outer" style="--fade-bg:#0B1926">
+    <div class="h-scroll-track">
+      <div class="rc-card">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">마케팅에 잘 모르셨을 때부터 지금까지 친절하게 도와주셔서 감사합니다. 덕분에 플레이스 순위가 눈에 띄게 올랐어요.</div>
+        <div class="rc-meta">플레이스 대행 고객</div>
+      </div>
+      <div class="rc-card flip">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">저의 요청에 성실하게 응해주시고 빠르게 처리해주셔서 너무 만족스럽습니다. 처음엔 반신반의했는데 한 달 만에 검색 순위가 바뀌는 걸 보고 놀랐습니다.</div>
+        <div class="rc-meta">블로그+플레이스 대행 고객</div>
+      </div>
+      <div class="rc-card">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">오픈한 지 얼마 안 됐는데 블로그 하나 올렸더니 바로 다음 날 문의가 왔어요. 신기했습니다. 계속 같이 하고 싶습니다.</div>
+        <div class="rc-meta">신규 오픈 카페 · 블로그 대행</div>
+      </div>
+      <div class="rc-card flip">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">광고비는 계속 나갔는데 효과를 못 느끼고 있었어요. 라운드컴퍼니로 바꾸고 나서 유입이 눈에 띄게 늘었습니다.</div>
+        <div class="rc-meta">뷰티샵 · SNS 대행</div>
+      </div>
+      <div class="rc-card">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">담당자분이 항상 빠르게 답변해 주시고 성과도 매달 리포트로 확인할 수 있어서 신뢰가 갑니다.</div>
+        <div class="rc-meta">의원 · 플레이스+블로그 대행</div>
+      </div>
+      <!-- duplicate for seamless loop -->
+      <div class="rc-card">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">마케팅에 잘 모르셨을 때부터 지금까지 친절하게 도와주셔서 감사합니다. 덕분에 플레이스 순위가 눈에 띄게 올랐어요.</div>
+        <div class="rc-meta">플레이스 대행 고객</div>
+      </div>
+      <div class="rc-card flip">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">저의 요청에 성실하게 응해주시고 빠르게 처리해주셔서 너무 만족스럽습니다. 처음엔 반신반의했는데 한 달 만에 검색 순위가 바뀌는 걸 보고 놀랐습니다.</div>
+        <div class="rc-meta">블로그+플레이스 대행 고객</div>
+      </div>
+      <div class="rc-card">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">오픈한 지 얼마 안 됐는데 블로그 하나 올렸더니 바로 다음 날 문의가 왔어요. 신기했습니다. 계속 같이 하고 싶습니다.</div>
+        <div class="rc-meta">신규 오픈 카페 · 블로그 대행</div>
+      </div>
+      <div class="rc-card flip">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">광고비는 계속 나갔는데 효과를 못 느끼고 있었어요. 라운드컴퍼니로 바꾸고 나서 유입이 눈에 띄게 늘었습니다.</div>
+        <div class="rc-meta">뷰티샵 · SNS 대행</div>
+      </div>
+      <div class="rc-card">
+        <div class="rc-stars">★ ★ ★ ★ ★</div>
+        <span class="rc-q">"</span>
+        <div class="rc-text">담당자분이 항상 빠르게 답변해 주시고 성과도 매달 리포트로 확인할 수 있어서 신뢰가 갑니다.</div>
+        <div class="rc-meta">의원 · 플레이스+블로그 대행</div>
+      </div>
     </div>
   </div>
-  <div class="review-img-row" style="margin-top:1px">
-    <div class="review-img-cell reveal d1">
-      <div class="review-img-placeholder"><div class="ph-label">카카오톡 후기 예정</div></div>
-      <div class="review-img-label">플레이스 대행 · 병원</div>
+
+  <!-- Dark testimonial cards (A/B/C) -->
+  <div class="rdark-grid">
+    <div class="rdark-card reveal d1">
+      <div class="rdark-stars">★ ★ ★ ★ ★</div>
+      <span class="rdark-q">"</span>
+      <div class="rdark-text">처음에는 반신반의했는데 2개월 만에 예약이 2배 늘었어요. 직접 해보려다 포기했던 걸 이렇게 쉽게 해결될 줄 몰랐습니다.</div>
+      <div class="rdark-divider"></div>
+      <div class="rdark-name">A 치과의원</div>
+      <div class="rdark-type">블로그 + 플레이스 대행</div>
     </div>
-    <div class="review-img-cell reveal d2">
-      <div class="review-img-placeholder"><div class="ph-label">카카오톡 후기 예정</div></div>
-      <div class="review-img-label">블로그 대행 · 음식점</div>
+    <div class="rdark-card reveal d2">
+      <div class="rdark-stars">★ ★ ★ ★ ★</div>
+      <span class="rdark-q">"</span>
+      <div class="rdark-text">동네에서 검색하면 항상 경쟁 카페가 나왔는데 이제 저희 카페가 상위에 뜨네요. 주말 예약이 꽉 차기 시작했어요.</div>
+      <div class="rdark-divider"></div>
+      <div class="rdark-name">B 로컬 카페</div>
+      <div class="rdark-type">플레이스 + 당근마켓 대행</div>
     </div>
-    <div class="review-img-cell reveal d3">
-      <div class="review-img-placeholder"><div class="ph-label">카카오톡 후기 예정</div></div>
-      <div class="review-img-label">숏폼 제작 · 뷰티샵</div>
+    <div class="rdark-card reveal d3">
+      <div class="rdark-stars">★ ★ ★ ★ ★</div>
+      <span class="rdark-q">"</span>
+      <div class="rdark-text">SNS 팔로워도 늘고 블로그 유입도 늘어서 정말 만족스러워요. 매달 성과 리포트 보면서 숫자가 올라가는 게 보여서 신뢰가 쌓여요.</div>
+      <div class="rdark-divider"></div>
+      <div class="rdark-name">C 피부관리샵</div>
+      <div class="rdark-type">SNS + 블로그 대행</div>
     </div>
   </div>
 </div>
@@ -996,11 +1260,11 @@ footer a{color:var(--teal);text-decoration:none}
     <div class="sec-label">진행 과정</div>
     <h2 class="sec-title">맡기면<br>이렇게 됩니다</h2>
   </div>
-  <div class="process-grid">
-    <div class="proc-item reveal d1"><div class="proc-step">Step 01</div><div class="proc-title">무료 진단</div><p class="proc-desc">현재 검색 순위와 경쟁사 현황을 무료로 분석합니다</p></div>
-    <div class="proc-item reveal d2"><div class="proc-step">Step 02</div><div class="proc-title">전략 수립</div><p class="proc-desc">업종·지역에 맞는 키워드와 운영 계획을 세웁니다</p></div>
-    <div class="proc-item reveal d3"><div class="proc-step">Step 03</div><div class="proc-title">운영 시작</div><p class="proc-desc">계약 후 24시간 내 세팅, 즉시 포스팅이 시작됩니다</p></div>
-    <div class="proc-item reveal d4"><div class="proc-step">Step 04</div><div class="proc-title">성과 리포트</div><p class="proc-desc">매월 순위·문의 현황을 투명하게 공유합니다</p></div>
+  <div class="process-timeline">
+    <div class="proc-item reveal d1"><div class="proc-circle">1</div><div class="proc-title">무료 진단</div><p class="proc-desc">현재 검색 순위와 경쟁사 현황을 무료로 분석합니다</p></div>
+    <div class="proc-item reveal d2"><div class="proc-circle">2</div><div class="proc-title">전략 수립</div><p class="proc-desc">업종·지역에 맞는 키워드와 운영 계획을 세웁니다</p></div>
+    <div class="proc-item reveal d3"><div class="proc-circle">3</div><div class="proc-title">운영 시작</div><p class="proc-desc">계약 후 24시간 내 세팅, 즉시 포스팅이 시작됩니다</p></div>
+    <div class="proc-item reveal d4"><div class="proc-circle">4</div><div class="proc-title">성과 리포트</div><p class="proc-desc">매월 순위·문의 현황을 투명하게 공유합니다</p></div>
   </div>
 </div>
 </section>
@@ -1122,6 +1386,26 @@ document.querySelectorAll('.price-cat-btn').forEach(btn=>{
     if(g)g.classList.add('active')
   })
 })
+
+// LINE GRAPH ANIMATION
+const graphObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return
+    e.target.querySelectorAll('.gc-line,.gc-fill,.gc-dot-s,.gc-dot-e').forEach(el=>el.classList.add('anim'))
+    graphObs.unobserve(e.target)
+  })
+},{threshold:.25})
+document.querySelectorAll('.graph-grid').forEach(g=>graphObs.observe(g))
+
+// INSIGHT POP
+const insObs=new IntersectionObserver(e=>e.forEach(x=>{
+  if(!x.isIntersecting)return
+  x.target.querySelectorAll('.insight-result').forEach(r=>r.classList.add('pop'))
+  x.target.querySelectorAll('.insight-stat').forEach(s=>s.classList.add('glow'))
+  x.target.querySelectorAll('.insight-bar-fill').forEach(b=>b.classList.add('animated'))
+  insObs.unobserve(x.target)
+}),{threshold:.2})
+document.querySelectorAll('.insight-block').forEach(b=>insObs.observe(b))
 </script>
 </body>
 </html>
