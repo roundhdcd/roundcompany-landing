@@ -36,6 +36,23 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 @keyframes popIn{0%{opacity:0;transform:scale(.9) translateY(6px)}100%{opacity:1;transform:none}}
 @keyframes countIn{from{opacity:0}to{opacity:1}}
 @keyframes floatTag{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes underlineSweep{0%{width:0}100%{width:100%}}
+@keyframes numPop{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes glowPulse{0%,100%{text-shadow:0 0 0 transparent}50%{text-shadow:0 0 20px rgba(184,240,0,.5),0 0 40px rgba(184,240,0,.2)}}
+@keyframes slideUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes barSeq{0%{width:0}100%{width:var(--w)}}
+
+/* EM highlight */
+.insight-text h3 em,.sec-title em{position:relative;display:inline}
+.insight-text h3 em::after,.sec-title em::after{content:"";position:absolute;bottom:-2px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--lime));transition:width .8s cubic-bezier(.22,1,.36,1) .4s}
+.visible .insight-text h3 em::after,.visible .sec-title em::after{width:100%}
+
+/* Result number pop */
+.insight-result.pop .to{animation:numPop .5s cubic-bezier(.22,1,.36,1) .3s both}
+.insight-result.pop .from{animation:slideUp .4s ease .1s both}
+
+/* Stat glow */
+.insight-stat.glow .n{animation:glowPulse 2.5s ease-in-out infinite .5s}
 
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;transition:.3s}
@@ -1078,6 +1095,25 @@ const cntObs=new IntersectionObserver(e=>e.forEach(x=>{
   cntObs.unobserve(x.target)
 }),{threshold:.5})
 document.querySelectorAll('.stats-grid').forEach(el=>cntObs.observe(el))
+
+// INSIGHT MOTION
+const insightObs=new IntersectionObserver(e=>e.forEach(x=>{
+  if(!x.isIntersecting)return
+  // result pop
+  x.target.querySelectorAll('.insight-result').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('pop'),i*120)
+  })
+  // stat glow
+  x.target.querySelectorAll('.insight-stat').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('glow'),i*200)
+  })
+  // bar sequential delay
+  x.target.querySelectorAll('.bar-trigger').forEach((b,i)=>{
+    setTimeout(()=>b.classList.add('animated'),i*180)
+  })
+  insightObs.unobserve(x.target)
+}),{threshold:.25})
+document.querySelectorAll('.insight-visual').forEach(el=>insightObs.observe(el))
 
 // SVC TABS
 document.querySelectorAll('.svc-tab').forEach(tab=>{
