@@ -495,6 +495,17 @@ footer a{color:var(--teal);text-decoration:none}
 .rdark-name{font-size:14px;font-weight:800;color:var(--white);margin-bottom:3px;letter-spacing:-.01em}
 .rdark-type{font-size:12px;color:var(--gray2);letter-spacing:.04em}
 
+/* CTA BAND */
+.cta-band{background:linear-gradient(90deg,rgba(0,102,255,.1),rgba(184,240,0,.04));border-top:1px solid rgba(0,102,255,.25);border-bottom:1px solid rgba(0,102,255,.25);padding:40px 10%;position:relative;overflow:hidden}
+.cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(0,102,255,.08),transparent 50%)}
+.cta-band-inner{position:relative;max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cta-band-copy .cta-band-label{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.cta-band-copy .cta-band-label::before{content:"";width:16px;height:1px;background:var(--teal)}
+.cta-band-copy h3{font-size:clamp(18px,2.5vw,26px);font-weight:900;color:var(--white);letter-spacing:-.03em;line-height:1.2}
+.cta-band-copy h3 em{color:var(--teal);font-style:normal}
+.cta-band-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.cta-band-sub{font-size:12px;color:var(--gray2);margin-top:4px}
+
 /* MOBILE */
 @media(max-width:760px){
   .nav{padding:0 20px}.nav-links{display:none}
@@ -712,6 +723,39 @@ footer a{color:var(--teal);text-decoration:none}
 </div>
 </section>
 
+<!-- PROCESS -->
+<section class="process-section">
+<div class="sec-inner">
+  <div class="reveal" style="text-align:left">
+    <div class="sec-label">진행 과정</div>
+    <h2 class="sec-title">맡기면<br>이렇게 됩니다</h2>
+    <p class="sec-sub" style="margin-top:12px">무료 진단부터 성과 리포트까지 — 전 과정을 대신합니다.</p>
+  </div>
+  <div class="process-timeline">
+    <div class="proc-item reveal d1"><div class="proc-circle">1</div><div class="proc-title">무료 진단</div><p class="proc-desc">현재 검색 순위와 경쟁사 현황을 무료로 분석합니다</p></div>
+    <div class="proc-item reveal d2"><div class="proc-circle">2</div><div class="proc-title">전략 수립</div><p class="proc-desc">업종·지역에 맞는 키워드와 운영 계획을 세웁니다</p></div>
+    <div class="proc-item reveal d3"><div class="proc-circle">3</div><div class="proc-title">운영 시작</div><p class="proc-desc">계약 후 24시간 내 세팅, 즉시 포스팅이 시작됩니다</p></div>
+    <div class="proc-item reveal d4"><div class="proc-circle">4</div><div class="proc-title">성과 리포트</div><p class="proc-desc">매월 순위·문의 현황을 투명하게 공유합니다</p></div>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+<div class="sec-inner">
+  <div class="reveal" style="text-align:center">
+    <div class="sec-label">라운드컴퍼니</div>
+    <h2 class="sec-title">4년이 만든 숫자</h2>
+  </div>
+  <div class="stats-grid reveal">
+    <div class="stat-item"><div class="stat-n" data-count="200" data-suffix="+">0</div><div class="stat-l">누적 고객</div></div>
+    <div class="stat-item"><div class="stat-n" data-count="92" data-suffix="%">0</div><div class="stat-l">재계약률</div></div>
+    <div class="stat-item"><div class="stat-n" data-count="4" data-suffix="년+">0</div><div class="stat-l">운영 경력</div></div>
+    <div class="stat-item"><div class="stat-n" data-count="5" data-suffix=".0">0</div><div class="stat-l">구글 평점</div></div>
+  </div>
+</div>
+</section>
+
 <!-- INSIGHT (B + C only) -->
 <section class="insight-section">
 <div class="sec-inner">
@@ -890,12 +934,12 @@ footer a{color:var(--teal);text-decoration:none}
     <p style="font-size:14px;color:var(--gray2);margin-top:8px">실제 대행 고객사 신규 문의 건수 변화</p>
   </div>
   <div class="graph-grid">
-    <!-- 헬스장 -->
+    <!-- 병원 -->
     <div class="graph-cell">
-      <div class="gc-cat">당근마켓</div>
-      <div class="gc-biz">헬스장 · 지역 신규 문의</div>
+      <div class="gc-cat">블로그 + 플레이스</div>
+      <div class="gc-biz">내과의원 · 신규 예약 문의</div>
       <div class="gc-nums">
-        <span class="gc-from">25명</span>
+        <span class="gc-from">18명</span>
         <span class="gc-arrow">→</span>
         <span class="gc-to">115</span>
       </div>
@@ -914,10 +958,10 @@ footer a{color:var(--teal);text-decoration:none}
       </svg>
       <div class="gc-period">대행 후 3개월 기준</div>
     </div>
-    <!-- 사주 -->
+    <!-- 뷰티샵 -->
     <div class="graph-cell">
-      <div class="gc-cat">블로그</div>
-      <div class="gc-biz">사주·타로 · 온라인 예약</div>
+      <div class="gc-cat">당근마켓 + SNS</div>
+      <div class="gc-biz">피부관리샵 · 신규 예약</div>
       <div class="gc-nums">
         <span class="gc-from">7명</span>
         <span class="gc-arrow">→</span>
@@ -938,10 +982,10 @@ footer a{color:var(--teal);text-decoration:none}
       </svg>
       <div class="gc-period">대행 후 3개월 기준</div>
     </div>
-    <!-- 입주청소 -->
+    <!-- 음식점 -->
     <div class="graph-cell">
-      <div class="gc-cat">플레이스</div>
-      <div class="gc-biz">입주청소 · 신규 견적 문의</div>
+      <div class="gc-cat">플레이스 + 블로그</div>
+      <div class="gc-biz">음식점 · 네이버 검색 유입</div>
       <div class="gc-nums">
         <span class="gc-from">20명</span>
         <span class="gc-arrow">→</span>
@@ -1070,6 +1114,21 @@ footer a{color:var(--teal);text-decoration:none}
   </div>
 </div>
 </section>
+
+<!-- CTA BAND 1 -->
+<div class="cta-band reveal">
+  <div class="cta-band-inner">
+    <div class="cta-band-copy">
+      <div class="cta-band-label">무료 진단</div>
+      <h3>지금 내 가게 검색 순위,<br><em>무료로 확인해 드립니다</em></h3>
+      <p class="cta-band-sub">5분이면 어디가 문제인지 알 수 있습니다</p>
+    </div>
+    <div class="cta-band-actions">
+      <a href="https://open.kakao.com/o/roundco" target="_blank" class="btn-primary">카카오톡 무료 진단 →</a>
+      <a href="tel:010-8335-7599" class="btn-ghost">☎ 010-8335-7599</a>
+    </div>
+  </div>
+</div>
 
 <!-- SERVICES -->
 <section class="svc-section" id="service">
@@ -1203,6 +1262,47 @@ footer a{color:var(--teal);text-decoration:none}
 </div>
 </section>
 
+<!-- CTA BAND 2 -->
+<div class="cta-band reveal">
+  <div class="cta-band-inner">
+    <div class="cta-band-copy">
+      <div class="cta-band-label">성과 보장</div>
+      <h3>결과가 없으면<br><em>재계약 안 합니다</em></h3>
+      <p class="cta-band-sub">92%가 재계약하는 이유 — 직접 확인하세요</p>
+    </div>
+    <div class="cta-band-actions">
+      <a href="https://open.kakao.com/o/roundco" target="_blank" class="btn-primary">무료 상담 시작하기 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="why-section">
+<div class="sec-inner">
+  <div class="reveal">
+    <div class="sec-label">차별점</div>
+    <h2 class="sec-title">대행사는 많습니다.<br>성과를 내는 곳은 다릅니다.</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal d1">
+      <div class="why-num">01</div>
+      <div class="why-title">계약 후 24시간 내 시작</div>
+      <p class="why-desc">세팅 완료 후 다음 날부터 바로 포스팅이 올라갑니다. 대기 기간 없이 즉시 검색 노출 작업이 시작됩니다.</p>
+    </div>
+    <div class="why-card reveal d2">
+      <div class="why-num">02</div>
+      <div class="why-title">재계약률 92%의 이유</div>
+      <p class="why-desc">성과 없으면 재계약 안 합니다. 매월 순위·문의 수를 직접 보여드리기 때문에 92%가 계속 함께합니다.</p>
+    </div>
+    <div class="why-card reveal d3">
+      <div class="why-num">03</div>
+      <div class="why-title">담당자 1:1 직접 관리</div>
+      <p class="why-desc">중간 전달 없이 담당자가 직접 소통합니다. 업종·지역 키워드를 분석해 맞춤 전략을 매달 조정합니다.</p>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- PRICING -->
 <section class="pricing-section" id="pricing">
 <div class="sec-inner">
@@ -1281,49 +1381,6 @@ footer a{color:var(--teal);text-decoration:none}
 </div>
 </section>
 
-<!-- STATS -->
-<section class="stats-section">
-<div class="sec-inner">
-  <div class="reveal" style="text-align:center">
-    <div class="sec-label">라운드컴퍼니</div>
-    <h2 class="sec-title">4년이 만든 숫자</h2>
-  </div>
-  <div class="stats-grid reveal">
-    <div class="stat-item"><div class="stat-n" data-count="200" data-suffix="+">0</div><div class="stat-l">누적 고수</div></div>
-    <div class="stat-item"><div class="stat-n" data-count="92" data-suffix="%">0</div><div class="stat-l">재계약률</div></div>
-    <div class="stat-item"><div class="stat-n" data-count="4" data-suffix="년+">0</div><div class="stat-l">운영 경력</div></div>
-    <div class="stat-item"><div class="stat-n" data-count="5" data-suffix=".0">0</div><div class="stat-l">구글 평점</div></div>
-  </div>
-</div>
-</section>
-
-<!-- WHY -->
-<section class="why-section">
-<div class="sec-inner">
-  <div class="reveal">
-    <div class="sec-label">차별점</div>
-    <h2 class="sec-title">대행사는 많습니다.<br>성과를 내는 곳은 다릅니다.</h2>
-  </div>
-  <div class="why-grid">
-    <div class="why-card reveal d1">
-      <div class="why-num">01</div>
-      <div class="why-title">데이터 기반 운영</div>
-      <p class="why-desc">라운드컴퍼니만의 독자 노하우로 최신 트렌드를 지속 최적화합니다. 감이 아닌 데이터로 움직입니다.</p>
-    </div>
-    <div class="why-card reveal d2">
-      <div class="why-num">02</div>
-      <div class="why-title">투명한 성과 보고</div>
-      <p class="why-desc">주기적인 성과 보고로 월별 현황을 파악할 수 있습니다. 숫자로 확인하는 운영입니다.</p>
-    </div>
-    <div class="why-card reveal d3">
-      <div class="why-num">03</div>
-      <div class="why-title">맞춤형 전략</div>
-      <p class="why-desc">업종·지역마다 검색 패턴이 다릅니다. 해당 업종에 최적화된 맞춤형 전략을 제안합니다.</p>
-    </div>
-  </div>
-</div>
-</section>
-
 <!-- BRANDS -->
 <section class="brands-section">
 <div class="sec-inner">
@@ -1344,22 +1401,6 @@ footer a{color:var(--teal);text-decoration:none}
       <div class="brands-cat">교육 · 서비스</div>
       <div class="brands-row"><div class="brand-chip">KIPP 한국의학</div><div class="brand-chip">고수법연구소</div><div class="brand-chip">Cabriotha</div><div class="brand-chip">JOY</div><div class="brand-chip">QK CLUB</div></div>
     </div>
-  </div>
-</div>
-</section>
-
-<!-- PROCESS -->
-<section class="process-section">
-<div class="sec-inner">
-  <div class="reveal" style="text-align:left">
-    <div class="sec-label">진행 과정</div>
-    <h2 class="sec-title">맡기면<br>이렇게 됩니다</h2>
-  </div>
-  <div class="process-timeline">
-    <div class="proc-item reveal d1"><div class="proc-circle">1</div><div class="proc-title">무료 진단</div><p class="proc-desc">현재 검색 순위와 경쟁사 현황을 무료로 분석합니다</p></div>
-    <div class="proc-item reveal d2"><div class="proc-circle">2</div><div class="proc-title">전략 수립</div><p class="proc-desc">업종·지역에 맞는 키워드와 운영 계획을 세웁니다</p></div>
-    <div class="proc-item reveal d3"><div class="proc-circle">3</div><div class="proc-title">운영 시작</div><p class="proc-desc">계약 후 24시간 내 세팅, 즉시 포스팅이 시작됩니다</p></div>
-    <div class="proc-item reveal d4"><div class="proc-circle">4</div><div class="proc-title">성과 리포트</div><p class="proc-desc">매월 순위·문의 현황을 투명하게 공유합니다</p></div>
   </div>
 </div>
 </section>
