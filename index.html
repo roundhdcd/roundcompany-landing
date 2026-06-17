@@ -37,6 +37,7 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 @keyframes countIn{from{opacity:0}to{opacity:1}}
 @keyframes floatTag{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes sonarRipple{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.8);opacity:0}}
+@keyframes marqueeR{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
 @keyframes underlineSweep{0%{width:0}100%{width:100%}}
 @keyframes numPop{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
 @keyframes glowPulse{0%,100%{text-shadow:0 0 0 transparent}50%{text-shadow:0 0 20px rgba(184,240,0,.5),0 0 40px rgba(184,240,0,.2)}}
@@ -67,20 +68,21 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .nav-cta:hover{background:var(--teal);color:#040C15}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:120px 10% 80px;position:relative;overflow:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;padding:0;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.2}
 .b1{width:700px;height:700px;background:radial-gradient(circle,#00B8CC,transparent 70%);top:-200px;right:-100px;animation:floatA 12s ease-in-out infinite}
 .b2{width:400px;height:400px;background:radial-gradient(circle,#B8F000,transparent 70%);bottom:-100px;left:5%;animation:floatC 10s ease-in-out infinite 2s;opacity:.1}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,184,204,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,184,204,.025) 1px,transparent 1px);background-size:80px 80px}
-.hero-content{position:relative;z-index:1;max-width:720px}
-.hero-kicker{font-size:15px;font-weight:700;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.hero-content{position:relative;z-index:1;max-width:720px;padding:110px 10% 0;flex:1;display:flex;flex-direction:column;justify-content:center}
+.hero-bottom{position:relative;z-index:1;width:100%}
+.hero-kicker{font-size:15px;font-weight:700;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
 .hero-kicker::before{content:"";width:32px;height:1px;background:var(--teal)}
-.hero-title{font-size:clamp(36px,6vw,76px);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:24px;min-height:2.3em}
+.hero-title{font-size:clamp(34px,5.5vw,72px);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:18px;min-height:2.2em}
 .hero-title .cursor{display:inline-block;width:3px;height:.85em;background:var(--teal);margin-left:4px;vertical-align:middle;animation:blink 1s infinite}
 .hero-title .hl{color:var(--teal)}
-.hero-desc{font-size:clamp(15px,1.8vw,18px);color:var(--gray2);line-height:1.9;margin-bottom:44px;max-width:480px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:72px}
+.hero-desc{font-size:clamp(14px,1.6vw,17px);color:var(--gray2);line-height:1.9;margin-bottom:32px;max-width:480px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#040C15;font-size:14px;font-weight:800;padding:15px 34px;border-radius:4px;text-decoration:none;letter-spacing:.02em;transition:.25s}
 .btn-primary:hover{background:var(--teal2);transform:translateY(-2px)}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);color:var(--gray2);font-size:14px;font-weight:600;padding:14px 30px;border-radius:4px;text-decoration:none;transition:.25s}
@@ -98,8 +100,10 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .trust-item strong{color:var(--white);font-weight:700}
 
 /* MARQUEE */
-.marquee-wrap{padding:18px 0;background:rgba(0,0,0,.2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);overflow:hidden;white-space:nowrap}
+.marquee-wrap{padding:14px 0;background:rgba(0,0,0,.2);border-top:1px solid var(--border2);overflow:hidden;white-space:nowrap}
+.marquee-wrap.rev{border-top:none;border-bottom:1px solid var(--border2);background:rgba(0,102,255,.03)}
 .marquee-inner{display:inline-flex;animation:marquee 36s linear infinite}
+.marquee-inner.rev{animation:marqueeR 30s linear infinite}
 .marquee-inner:hover{animation-play-state:paused}
 .marquee-item{display:inline-flex;align-items:center;gap:14px;padding:0 36px;font-size:12px;font-weight:600;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
 .marquee-item strong{color:var(--gray2)}
@@ -424,42 +428,64 @@ footer a{color:var(--teal);text-decoration:none}
       <div class="h-stat"><div class="n"><em>5.0</em></div><div class="l">구글 평점</div></div>
     </div>
   </div>
-</section>
-
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-item"><div class="trust-dot"></div><strong>네이버 플레이스</strong> 1위 달성</div>
-  <div class="trust-item"><div class="trust-dot"></div>블로그 월 <strong>2,190건</strong> 조회</div>
-  <div class="trust-item"><div class="trust-dot"></div>재계약률 <strong>92%</strong></div>
-  <div class="trust-item"><div class="trust-dot"></div>구글 평점 <strong>5.0</strong></div>
-  <div class="trust-item"><div class="trust-dot"></div>카카오톡 <strong>roundco</strong></div>
-</div>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-inner">
-    <span class="marquee-item"><strong>블로그 상위 노출</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">네이버 플레이스 1위<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>재계약률 92%</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">구글 평점 5.0<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>당근마켓 바이럴</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">광고 ROAS 400%+<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>인스타 릴스 제작</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">유튜브 컨텐츠 제작<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>누적 고수 200+</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">1:1 전담 관리<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>블로그 상위 노출</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">네이버 플레이스 1위<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>재계약률 92%</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">구글 평점 5.0<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>당근마켓 바이럴</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">광고 ROAS 400%+<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>인스타 릴스 제작</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">유튜브 컨텐츠 제작<span class="marquee-sep"></span></span>
-    <span class="marquee-item"><strong>누적 고수 200+</strong><span class="marquee-sep"></span></span>
-    <span class="marquee-item">1:1 전담 관리<span class="marquee-sep"></span></span>
+  <div class="hero-bottom">
+    <div class="trust-bar">
+      <div class="trust-item"><div class="trust-dot"></div><strong>네이버 플레이스</strong> 1위 달성</div>
+      <div class="trust-item"><div class="trust-dot"></div>블로그 월 <strong>2,190건</strong> 조회</div>
+      <div class="trust-item"><div class="trust-dot"></div>재계약률 <strong>92%</strong></div>
+      <div class="trust-item"><div class="trust-dot"></div>구글 평점 <strong>5.0</strong></div>
+      <div class="trust-item"><div class="trust-dot"></div>카카오톡 <strong>roundco</strong></div>
+    </div>
+    <div class="marquee-wrap">
+      <div class="marquee-inner">
+        <span class="marquee-item"><strong>블로그 상위 노출</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">네이버 플레이스 1위<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>재계약률 92%</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">구글 평점 5.0<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>당근마켓 바이럴</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">광고 ROAS 400%+<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>인스타 릴스 제작</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">유튜브 컨텐츠 제작<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>누적 고수 200+</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">1:1 전담 관리<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>블로그 상위 노출</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">네이버 플레이스 1위<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>재계약률 92%</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">구글 평점 5.0<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>당근마켓 바이럴</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">광고 ROAS 400%+<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>인스타 릴스 제작</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">유튜브 컨텐츠 제작<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>누적 고수 200+</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">1:1 전담 관리<span class="marquee-sep"></span></span>
+      </div>
+    </div>
+    <div class="marquee-wrap rev">
+      <div class="marquee-inner rev">
+        <span class="marquee-item">맛집 · 카페<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>병원 · 의원</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">뷰티 · 헤어샵<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>학원 · 교육</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">인테리어 · 시공<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>쇼핑몰 · 스토어</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">부동산 · 공인중개<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>자동차 · 정비</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">운동 · 헬스<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>반려동물</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">맛집 · 카페<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>병원 · 의원</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">뷰티 · 헤어샵<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>학원 · 교육</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">인테리어 · 시공<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>쇼핑몰 · 스토어</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">부동산 · 공인중개<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>자동차 · 정비</strong><span class="marquee-sep"></span></span>
+        <span class="marquee-item">운동 · 헬스<span class="marquee-sep"></span></span>
+        <span class="marquee-item"><strong>반려동물</strong><span class="marquee-sep"></span></span>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- PAIN -->
 <section class="pain-section" id="pain">
