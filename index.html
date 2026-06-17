@@ -74,7 +74,7 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .b2{width:400px;height:400px;background:radial-gradient(circle,#B8F000,transparent 70%);bottom:-100px;left:5%;animation:floatC 10s ease-in-out infinite 2s;opacity:.1}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,184,204,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,184,204,.025) 1px,transparent 1px);background-size:80px 80px}
 .hero-content{position:relative;z-index:1;max-width:720px}
-.hero-kicker{font-size:12px;font-weight:700;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.hero-kicker{font-size:15px;font-weight:700;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
 .hero-kicker::before{content:"";width:32px;height:1px;background:var(--teal)}
 .hero-title{font-size:clamp(36px,6vw,76px);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:24px;min-height:2.3em}
 .hero-title .cursor{display:inline-block;width:3px;height:.85em;background:var(--teal);margin-left:4px;vertical-align:middle;animation:blink 1s infinite}
@@ -157,12 +157,12 @@ section{padding:100px 10%}
 /* REVIEW */
 .review-section{background:var(--bg2);position:relative}
 .review-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,240,0,.2),transparent)}
-.review-layout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:52px}
-.review-col{background:var(--bg2);padding:36px 32px}
+.review-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;background:transparent;margin-top:52px}
+.review-col{background:#FFFFFF;padding:36px 32px;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.3)}
 .review-stars{font-size:13px;color:#FFCB00;letter-spacing:.12em;margin-bottom:16px}
-.review-text{font-size:15px;color:var(--white);line-height:1.8;font-weight:500;margin-bottom:20px}
-.review-text::before{content:'"';color:rgba(0,184,204,.35);font-size:40px;line-height:0;vertical-align:-.4em;margin-right:6px}
-.review-meta{font-size:12px;color:var(--gray);letter-spacing:.03em;border-top:1px solid var(--border2);padding-top:16px}
+.review-text{font-size:15px;color:#1A1A2E;line-height:1.8;font-weight:500;margin-bottom:20px}
+.review-text::before{content:'"';color:rgba(184,240,0,.6);font-size:40px;line-height:0;vertical-align:-.4em;margin-right:6px}
+.review-meta{font-size:12px;color:#666;letter-spacing:.03em;border-top:1px solid rgba(0,0,0,.08);padding-top:16px}
 .review-img-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-top:1px}
 .review-img-cell{background:var(--bg2);padding:24px}
 .review-img-placeholder{aspect-ratio:4/3;background:rgba(0,184,204,.03);border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed rgba(0,184,204,.12)}
@@ -287,12 +287,30 @@ section{padding:100px 10%}
 
 /* BRANDS */
 .brands-section{position:relative}
-.brands-inner{margin-top:40px;display:flex;flex-direction:column;gap:24px}
+.brands-inner{margin-top:40px;display:flex;flex-direction:column;gap:32px}
 .brands-row-wrap{}
 .brands-cat{font-size:10px;font-weight:700;color:var(--gray);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
-.brands-row{display:flex;flex-wrap:wrap;gap:8px}
-.brand-chip{background:var(--card);border:1px solid var(--border2);border-radius:3px;padding:7px 16px;font-size:13px;color:var(--gray2);transition:.2s;letter-spacing:.01em}
-.brand-chip:hover{border-color:rgba(0,184,204,.3);color:var(--white)}
+.brands-row{display:flex;flex-wrap:wrap;gap:12px}
+.brand-chip{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:18px 22px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--gray2);
+  transition:.3s;
+  letter-spacing:.01em;
+  position:relative;
+  overflow:hidden;
+  animation:floatA 7s ease-in-out infinite;
+}
+.brand-chip:nth-child(2n){animation-name:floatC;animation-duration:9s}
+.brand-chip:nth-child(3n){animation-delay:1.5s}
+.brand-chip:nth-child(4n){animation-delay:2.8s;animation-duration:8s}
+.brand-chip::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),transparent);opacity:0;transition:.3s}
+.brand-chip:hover{border-color:rgba(184,240,0,.3);color:var(--white);transform:translateY(-3px)}
+.brand-chip:hover::before{opacity:1}
 
 /* PROCESS */
 .process-section{background:var(--bg2);position:relative}
@@ -487,131 +505,6 @@ footer a{color:var(--teal);text-decoration:none}
 </div>
 </section>
 
-<!-- INSIGHT -->
-<section class="insight-section">
-<div class="sec-inner">
-
-  <!-- A: 문제 고발형 -->
-  <div class="reveal">
-    <div class="sec-label">왜 안 되는가</div>
-    <h2 class="sec-title">마케팅 비용은 쓰는데<br><em style="color:var(--teal);font-style:normal">왜 고객이 남지 않을까요</em></h2>
-    <p class="sec-sub">플랫폼에 의존할수록 고객 데이터는 내 것이 아닙니다.</p>
-  </div>
-  <div class="insight-block reveal">
-    <div class="insight-text">
-      <div class="insight-eyebrow">문제 고발</div>
-      <h3>검색 노출이 없으면<br><em>광고비는 낭비</em>입니다</h3>
-      <p>블로그·플레이스 기반 없이 광고만 집행하면 클릭은 발생하지만 재방문이 없어요. 플랫폼은 고객을 우리에게 빌려줄 뿐, 데이터는 플랫폼의 것입니다.</p>
-      <div class="insight-list">
-        <div class="insight-item">광고비를 쓸수록 플랫폼 의존도가 높아진다</div>
-        <div class="insight-item">검색 노출 없이는 신규 고객 유입이 멈춘다</div>
-        <div class="insight-item">한 번 온 고객이 다시 찾을 이유가 없어진다</div>
-      </div>
-    </div>
-    <div class="insight-visual">
-      <div class="insight-bar-section">
-        <div class="insight-bar-title">플랫폼 평균 판매 수수료율</div>
-        <div class="insight-bar-row">
-          <div class="insight-bar-lbl">네이버</div>
-          <div class="insight-bar-track"><div class="insight-bar-fill bar-trigger" style="--w:23%"></div></div>
-          <div class="insight-bar-val">6.3%</div>
-        </div>
-        <div class="insight-bar-row">
-          <div class="insight-bar-lbl">G마켓</div>
-          <div class="insight-bar-track"><div class="insight-bar-fill bar-trigger" style="--w:43%"></div></div>
-          <div class="insight-bar-val">11.7%</div>
-        </div>
-        <div class="insight-bar-row">
-          <div class="insight-bar-lbl">쿠팡</div>
-          <div class="insight-bar-track"><div class="insight-bar-fill bar-trigger" style="--w:45%"></div></div>
-          <div class="insight-bar-val">12.3%</div>
-        </div>
-        <div class="insight-bar-row">
-          <div class="insight-bar-lbl">SSG닷컴</div>
-          <div class="insight-bar-track"><div class="insight-bar-fill bar-trigger" style="--w:69%"></div></div>
-          <div class="insight-bar-val">18.8%</div>
-        </div>
-        <div class="insight-bar-row">
-          <div class="insight-bar-lbl">무신사</div>
-          <div class="insight-bar-track"><div class="insight-bar-fill bar-trigger" style="--w:100%"></div></div>
-          <div class="insight-bar-val">27.8%</div>
-        </div>
-        <div style="font-size:10px;color:var(--gray);margin-top:12px;letter-spacing:.03em">*출처: 2025 온라인플랫폼 입점 소상공인 실태조사</div>
-      </div>
-      <div class="insight-stat-row" style="margin-top:8px">
-        <div class="insight-stat"><div class="n">72.4%</div><div class="l">수수료·광고료 부담 호소</div></div>
-        <div class="insight-stat"><div class="n">20%</div><div class="l">매출의 평균 플랫폼 비용</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- B: 스토리텔링형 -->
-  <div class="insight-block reverse reveal" style="margin-top:1px">
-    <div class="insight-text">
-      <div class="insight-eyebrow">실제 사례</div>
-      <h3>12일 만에<br>플레이스 <em>12위→1위</em></h3>
-      <p>대전 맛집 사장님은 광고비를 매달 70만원씩 쓰고 있었어요. 문의는 없었습니다. 문제는 광고가 아니라 검색 노출 구조였어요.</p>
-      <div class="insight-list">
-        <div class="insight-item">블로그·플레이스 기반 작업 먼저 진행</div>
-        <div class="insight-item">12일 만에 플레이스 1위 달성</div>
-        <div class="insight-item">광고비 줄이고 자연 유입으로 전환</div>
-      </div>
-    </div>
-    <div class="insight-visual">
-      <div class="insight-story">
-        광고비만 쓰다가 3년이 지났어요. 라운드컴퍼니 만나고 나서야 문제가 뭔지 알았습니다. 블로그 하나 제대로 안 돼 있던 거예요.
-        <div class="insight-story-meta">대전 맛집 · 네이버 플레이스 1위 달성</div>
-      </div>
-      <div class="insight-result-grid">
-        <div class="insight-result">
-          <div class="from">12위</div>
-          <div class="to">1위</div>
-          <div class="lbl">플레이스 순위</div>
-        </div>
-        <div class="insight-result">
-          <div class="from">12일</div>
-          <div class="to" style="font-size:22px;padding-top:6px">달성</div>
-          <div class="lbl">작업 소요 기간</div>
-        </div>
-        <div class="insight-result">
-          <div class="from">50건</div>
-          <div class="to">2,190</div>
-          <div class="lbl">월간 블로그 조회수</div>
-        </div>
-        <div class="insight-result">
-          <div class="from" style="opacity:0">-</div>
-          <div class="to" style="font-size:22px;padding-top:6px">3곳</div>
-          <div class="lbl">비뇨기과 동시 1위</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- C: 해결책 제시형 -->
-  <div class="insight-block reveal" style="margin-top:1px">
-    <div class="insight-text">
-      <div class="insight-eyebrow">라운드컴퍼니 접근</div>
-      <h3>광고 전에<br><em>검색 기반</em>을 먼저 만듭니다</h3>
-      <p>잘 나가는 브랜드들은 플랫폼에서 다시 자사 채널로 돌아오고 있어요. 검색에서 발견되고, 신뢰를 쌓고, 단골이 되는 구조. 라운드컴퍼니가 그 기반을 만듭니다.</p>
-      <div class="insight-list">
-        <div class="insight-item">블로그·플레이스로 검색 노출 기반 구축</div>
-        <div class="insight-item">SNS·릴스로 브랜드 신뢰도 형성</div>
-        <div class="insight-item">당근마켓으로 동네 단골 확보</div>
-      </div>
-    </div>
-    <div class="insight-visual">
-      <div class="insight-stat-row">
-        <div class="insight-stat"><div class="n">200<em style="font-size:18px;color:var(--teal)">+</em></div><div class="l">누적 관리 업체</div></div>
-        <div class="insight-stat"><div class="n">92<em style="font-size:18px;color:var(--teal)">%</em></div><div class="l">재계약률</div></div>
-        <div class="insight-stat"><div class="n">4년<em style="font-size:18px;color:var(--teal)">+</em></div><div class="l">운영 경력</div></div>
-        <div class="insight-stat"><div class="n">5.0</div><div class="l">평균 평점</div></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-</section>
-
 <!-- CASE STUDY -->
 <section id="result">
 <div class="sec-inner">
@@ -731,10 +624,6 @@ footer a{color:var(--teal);text-decoration:none}
         <div class="svc-feat">브랜드 블로그 관리대행 (월 단위)</div>
         <div class="svc-feat">월간 성과 리포트</div>
       </div>
-      <div class="svc-price-row">
-        <div class="svc-price-amount">250,000</div>
-        <div class="svc-price-note">원~ (5건) · VAT 별도<br>브랜드 블로그 관리 200,000원~/월</div>
-      </div>
     </div>
     <div class="svc-visual">
       <div class="svc-card-label">블로그 조회수 변화 (실제)</div>
@@ -757,10 +646,6 @@ footer a{color:var(--teal);text-decoration:none}
         <div class="svc-feat">체험단 운영 및 정보 관리</div>
         <div class="svc-feat">노출 순위 전환 추적 리포트</div>
         <div class="svc-feat">경쟁사 키워드 분석 적용</div>
-      </div>
-      <div class="svc-price-row">
-        <div class="svc-price-amount">300,000</div>
-        <div class="svc-price-note">원~/월 · VAT 별도<br>3개월 550,000원~ · 6개월 1,000,000원~</div>
       </div>
     </div>
     <div class="svc-visual" style="position:relative">
@@ -785,10 +670,6 @@ footer a{color:var(--teal);text-decoration:none}
         <div class="svc-feat">네이버 카페 탭 상위 노출</div>
         <div class="svc-feat">5건 기준 패키지 운영</div>
       </div>
-      <div class="svc-price-row">
-        <div class="svc-price-amount">200,000</div>
-        <div class="svc-price-note">원~ (5건) · VAT 별도</div>
-      </div>
     </div>
     <div class="svc-visual">
       <div class="svc-card-label">카페 탭 노출 효과</div>
@@ -808,10 +689,6 @@ footer a{color:var(--teal);text-decoration:none}
         <div class="svc-feat">스레드 운영 (일상글 + 해시태그 최적화)</div>
         <div class="svc-feat">유튜브 쇼츠 기획 및 제작</div>
         <div class="svc-feat">팔로워 소통 유도 · 성과 분석</div>
-      </div>
-      <div class="svc-price-row">
-        <div class="svc-price-amount">80,000</div>
-        <div class="svc-price-note">원~/건 (릴스) · 5건 400,000원~<br>스레드 20,000원~/건 · 유튜브 100,000원~/건</div>
       </div>
     </div>
     <div class="svc-visual">
@@ -835,10 +712,6 @@ footer a{color:var(--teal);text-decoration:none}
         <div class="svc-feat">로컬 광고 운영 관리</div>
         <div class="svc-feat">참여율 225%+ 달성</div>
       </div>
-      <div class="svc-price-row">
-        <div class="svc-price-amount">200,000</div>
-        <div class="svc-price-note">원 (A패키지) · B 350,000원 · C 550,000원</div>
-      </div>
     </div>
     <div class="svc-visual">
       <div class="svc-card-label">당근 A패키지 구성</div>
@@ -860,7 +733,7 @@ footer a{color:var(--teal);text-decoration:none}
 <div class="sec-inner">
   <div class="reveal">
     <div class="sec-label">가격 안내</div>
-    <h2 class="sec-title">투명하게<br>공개합니다</h2>
+    <h2 class="sec-title">서비스 패키지<br>안내</h2>
     <p class="sec-sub">무료 상담 후 최종 견적 확정 · 플랫폼별 맞춤 전략 제안<br>VAT 별도 · 게시 건수·계약 기간에 따라 견적 조정 가능</p>
   </div>
   <div class="price-cats reveal">
@@ -873,32 +746,24 @@ footer a{color:var(--teal);text-decoration:none}
       <div class="price-platform">네이버 카페</div>
       <div class="price-name">카페 바이럴</div>
       <div class="price-desc">지역 카페 · 맘카페 · 커뮤니티 바이럴 게시 · 5건 기준</div>
-      <div class="price-val">200,000<span>원~</span></div>
       <ul class="price-list"><li>지역 선별 커뮤니티 발행</li><li>자연스러운 후기형 작성</li><li>5건 기준 패키지</li></ul>
     </div>
     <div class="price-card featured reveal d2">
       <div class="price-platform">네이버 블로그</div>
       <div class="price-name">블로그 상위 노출</div>
       <div class="price-desc">파워블로거 운영 · 키워드 SEO 최적화 · 5건 기준</div>
-      <div class="price-val">250,000<span>원~</span></div>
       <ul class="price-list"><li>키워드 SEO 최적화</li><li>파워블로거 발행</li><li>월간 성과 리포트</li></ul>
     </div>
     <div class="price-card reveal d3">
       <div class="price-platform">네이버 블로그</div>
       <div class="price-name">브랜드 블로그 관리</div>
       <div class="price-desc">브랜드 블로그 운영 · 컨텐츠 기획 및 발행 · 월 단위</div>
-      <div class="price-val">200,000<span>원~/월</span></div>
       <ul class="price-list"><li>브랜드 블로그 전체 운영</li><li>월 단위 계약</li><li>컨텐츠 기획 포함</li></ul>
     </div>
     <div class="price-card reveal d1" style="grid-column:1/-1">
       <div class="price-platform">네이버 플레이스</div>
       <div class="price-name">플레이스 관리</div>
       <div class="price-desc">플레이스 최적화 · 상위노출 · 체험단 운영 및 정보관리 · 노출 순위 전환 추적</div>
-      <div style="display:flex;gap:40px;margin-top:14px;flex-wrap:wrap">
-        <div><div class="price-val">300,000<span>원~</span></div><div style="font-size:11px;color:var(--gray);margin-top:4px;letter-spacing:.03em">1개월</div></div>
-        <div><div class="price-val">550,000<span>원~</span></div><div style="font-size:11px;color:var(--gray);margin-top:4px;letter-spacing:.03em">3개월</div></div>
-        <div><div class="price-val">1,000,000<span>원~</span></div><div style="font-size:11px;color:var(--gray);margin-top:4px;letter-spacing:.03em">6개월</div></div>
-      </div>
     </div>
   </div>
   <div class="price-grid" id="pcat-sns">
@@ -906,24 +771,18 @@ footer a{color:var(--teal);text-decoration:none}
       <div class="price-platform">인스타그램</div>
       <div class="price-name">릴스 제작</div>
       <div class="price-desc">릴스 기획 및 제작 · 인스타 프로필 관리 · 트렌드 타깃 분석 최적화</div>
-      <div class="price-val">80,000<span>원~/건</span></div>
-      <div style="font-size:13px;font-weight:800;color:var(--lime);margin-top:6px">5건 400,000원~</div>
       <ul class="price-list"><li>릴스 기획·제작</li><li>인스타 프로필 관리</li><li>트렌드 타깃 최적화</li></ul>
     </div>
     <div class="price-card reveal d2">
       <div class="price-platform">스레드</div>
       <div class="price-name">스레드 운영</div>
       <div class="price-desc">브랜드 일상 글 작성 · 해시태그 최적화 · 팔로워 소통 유도</div>
-      <div class="price-val">20,000<span>원~/건</span></div>
-      <div style="font-size:13px;font-weight:800;color:var(--lime);margin-top:6px">5건 80,000원~</div>
       <ul class="price-list"><li>브랜드 일상 글 작성</li><li>해시태그 최적화</li><li>팔로워 소통 유도</li></ul>
     </div>
     <div class="price-card reveal d3">
       <div class="price-platform">유튜브</div>
       <div class="price-name">유튜브 컨텐츠</div>
       <div class="price-desc">쇼츠 기획 및 제작 · 성과분석 · 영상소스 계약업체 직접 제공</div>
-      <div class="price-val">100,000<span>원~/건</span></div>
-      <div style="font-size:13px;font-weight:800;color:var(--lime);margin-top:6px">5건 450,000원~</div>
       <ul class="price-list"><li>쇼츠 기획·제작</li><li>영상소스 직접 제공</li><li>성과 분석</li></ul>
     </div>
   </div>
@@ -932,19 +791,16 @@ footer a{color:var(--teal);text-decoration:none}
       <div class="price-platform">당근마켓</div>
       <div class="price-name">A 패키지</div>
       <div class="price-desc">비즈프로필 후기 5건 · 동네생활 1건 · 소식글 관심 50건 · 단골맞기 100건 · 찜하기 100건</div>
-      <div class="price-val">200,000<span>원</span></div>
     </div>
     <div class="price-card featured reveal d2">
       <div class="price-platform">당근마켓</div>
       <div class="price-name">B 패키지</div>
       <div class="price-desc">비즈프로필 후기 7건 · 동네생활 3건 · 소식글 관심 100건 · 단골맞기 200건 · 찜하기 200건 · 쇼츠 1건</div>
-      <div class="price-val">350,000<span>원</span></div>
     </div>
     <div class="price-card reveal d3">
       <div class="price-platform">당근마켓</div>
       <div class="price-name">C 패키지</div>
       <div class="price-desc">비즈프로필 후기 10건 · 동네생활 10건 · 소식글 관심 200건 · 단골맞기 500건 · 찜하기 500건 · 쇼츠 2건 · 30일 관리</div>
-      <div class="price-val">550,000<span>원</span></div>
     </div>
   </div>
 </div>
@@ -1087,7 +943,7 @@ const barObs=new IntersectionObserver(e=>e.forEach(x=>{
   x.target.querySelectorAll('.bar-fill').forEach(b=>b.classList.add('animated'))
   barObs.unobserve(x.target)
 }),{threshold:.3})
-document.querySelectorAll('.svc-visual,.case-card,.insight-visual,.insight-bar-section').forEach(el=>barObs.observe(el))
+document.querySelectorAll('.svc-visual,.case-card').forEach(el=>barObs.observe(el))
 document.querySelectorAll('.bar-trigger').forEach(b=>{
   const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('animated');io.unobserve(x.target)}}),{threshold:.3})
   io.observe(b)
@@ -1099,30 +955,11 @@ const cntObs=new IntersectionObserver(e=>e.forEach(x=>{
   x.target.querySelectorAll('[data-count]').forEach(el=>{
     const target=+el.dataset.count,suffix=el.dataset.suffix||''
     let v=0,step=target/60
-    const t=setInterval(()=>{v+=step;if(v>=target){v=target;clearInterval(t)}el.textContent=Math.floor(v)+suffix},16)
+    const t=setInterval(()=>{v+=step;if(v>=target){v=target;clearInterval(t);el.style.animation='glowPulse 2.5s ease-in-out infinite'}el.textContent=Math.floor(v)+suffix},16)
   })
   cntObs.unobserve(x.target)
 }),{threshold:.5})
 document.querySelectorAll('.stats-grid').forEach(el=>cntObs.observe(el))
-
-// INSIGHT MOTION
-const insightObs=new IntersectionObserver(e=>e.forEach(x=>{
-  if(!x.isIntersecting)return
-  // result pop
-  x.target.querySelectorAll('.insight-result').forEach((el,i)=>{
-    setTimeout(()=>el.classList.add('pop'),i*120)
-  })
-  // stat glow
-  x.target.querySelectorAll('.insight-stat').forEach((el,i)=>{
-    setTimeout(()=>el.classList.add('glow'),i*200)
-  })
-  // bar sequential delay
-  x.target.querySelectorAll('.bar-trigger').forEach((b,i)=>{
-    setTimeout(()=>b.classList.add('animated'),i*180)
-  })
-  insightObs.unobserve(x.target)
-}),{threshold:.25})
-document.querySelectorAll('.insight-visual').forEach(el=>insightObs.observe(el))
 
 // SVC TABS
 document.querySelectorAll('.svc-tab').forEach(tab=>{
