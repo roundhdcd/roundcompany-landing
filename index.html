@@ -506,6 +506,16 @@ document.querySelectorAll('.hero').forEach(el => cObs.observe(el));
     requestAnimationFrame(frame);
   }
   const caseCards = document.querySelectorAll('.case-card[data-from]');
+  /* initialise text to start-of-animation values */
+  caseCards.forEach(function(card){
+    const from = parseInt(card.dataset.from);
+    const fromUnit = card.dataset.fromUnit;
+    const to = parseInt(card.dataset.to);
+    const toUnit = card.dataset.toUnit;
+    const isRank = toUnit === '위';
+    card.querySelector('.cn-from').textContent = from + fromUnit;
+    card.querySelector('.cn-to').textContent = (isRank ? from : 0) + toUnit;
+  });
   const obs = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(!entry.isIntersecting) return;
@@ -514,14 +524,16 @@ document.querySelectorAll('.hero').forEach(el => cObs.observe(el));
       const fromUnit = card.dataset.fromUnit;
       const to = parseInt(card.dataset.to);
       const toUnit = card.dataset.toUnit;
+      const isRank = toUnit === '위';
       const elFrom = card.querySelector('.cn-from');
       const elTo = card.querySelector('.cn-to');
-      const duration = Math.min(1200, 600 + (to-from)*4);
-      animateCounter(elFrom, from, from, fromUnit, duration);
-      animateCounter(elTo, 0, to, toUnit, duration);
+      /* rank: count DOWN from→to / count: count UP 0→to */
+      const startVal = isRank ? from : 0;
+      const duration = isRank ? 900 : Math.min(1400, 700 + to * 5);
+      animateCounter(elTo, startVal, to, toUnit, duration);
       obs.unobserve(card);
     });
-  },{threshold:0.4});
+  },{threshold:0.5});
   caseCards.forEach(function(c){obs.observe(c);});
 })();
 </script>
