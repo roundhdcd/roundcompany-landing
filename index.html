@@ -32,12 +32,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 28px;display:fl
 .btn-nav:hover{opacity:.85}
 
 /* ─── PAGE 1: HERO ─── */
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 32px 80px;max-width:680px;margin:0 auto}
-.hero-title{font-size:clamp(34px,7vw,60px);font-weight:900;line-height:1.15;letter-spacing:-.04em;margin-bottom:56px}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:150px 32px 80px;max-width:680px;margin:0 auto}
+.hero-title{font-size:clamp(34px,7vw,60px);font-weight:900;line-height:1.15;letter-spacing:-.04em;margin-bottom:56px;white-space:pre-line;min-height:3.6em}
 .hero-title em{color:var(--teal);font-style:normal}
+.cursor{display:inline-block;width:3px;height:1em;background:var(--teal);vertical-align:text-bottom;animation:blink .65s step-end infinite;margin-left:2px}
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:0}
 .hstat{text-align:center;padding:24px 12px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:16px}
-.hstat-num{font-size:clamp(36px,8vw,56px);font-weight:900;letter-spacing:-.04em;line-height:1;background:linear-gradient(135deg,var(--teal) 10%,var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hstat-num{font-size:clamp(36px,8vw,56px);font-weight:900;letter-spacing:-.04em;line-height:1}
+.hstat-num.c-blue{color:var(--teal)}
+.hstat-num.c-white{color:var(--white)}
+.hstat-num.c-lime{color:var(--lime)}
 .hstat-lbl{font-size:13px;color:var(--gray2);margin-top:8px;font-weight:600}
 
 /* ─── MARQUEE ─── */
@@ -149,30 +153,7 @@ footer a{color:var(--gray2);text-decoration:none}
   <a href="https://open.kakao.com/o/roundco" target="_blank" class="btn-nav">무료 진단 →</a>
 </nav>
 
-<!-- ─── PAGE 1: 헤드라인 + 수치 ─── -->
-<section class="hero">
-  <h1 class="hero-title reveal">
-    광고대행사의 본질은<br>
-    <em>클라이언트의 매출 증가,</em><br>
-    그것이 전부입니다.
-  </h1>
-  <div class="hero-stats reveal d1">
-    <div class="hstat">
-      <div class="hstat-num"><span class="counter" data-target="200" data-suffix="+">200+</span></div>
-      <div class="hstat-lbl">누적 고객</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-num"><span class="counter" data-target="92" data-suffix="%">92%</span></div>
-      <div class="hstat-lbl">재계약률</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-num">5.0</div>
-      <div class="hstat-lbl">구글 평점</div>
-    </div>
-  </div>
-</section>
-
-<!-- 마퀴 -->
+<!-- 마퀴 (네비 바로 아래 - 첫 화면 상단) -->
 <div class="mq-wrap">
   <div class="mq-inner">
     <span class="mq-item"><strong>블로그 상위 노출</strong><span class="mq-dot"></span></span>
@@ -193,6 +174,25 @@ footer a{color:var(--gray2);text-decoration:none}
     <span class="mq-item">누적 고객 200+<span class="mq-dot"></span></span>
   </div>
 </div>
+
+<!-- ─── PAGE 1: 헤드라인 + 수치 ─── -->
+<section class="hero">
+  <h1 class="hero-title" id="heroTitle"><span class="cursor"></span></h1>
+  <div class="hero-stats reveal d1">
+    <div class="hstat">
+      <div class="hstat-num c-blue"><span class="counter" data-target="200" data-suffix="+">200+</span></div>
+      <div class="hstat-lbl">누적 고객</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num c-white"><span class="counter" data-target="92" data-suffix="%">92%</span></div>
+      <div class="hstat-lbl">재계약률</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num c-lime">5.0</div>
+      <div class="hstat-lbl">구글 평점</div>
+    </div>
+  </div>
+</section>
 
 <!-- ─── PAGE 2: 버튼 ─── -->
 <div class="cta-page" id="contact">
@@ -360,7 +360,7 @@ footer a{color:var(--gray2);text-decoration:none}
 <!-- ─── 서비스 ─── -->
 <section class="svc-section" id="service">
   <div class="sec-label reveal">서비스</div>
-  <h2 class="sec-title reveal d1">맡기면<br>이렇게 됩니다</h2>
+  <h2 class="sec-title reveal d1">라운드컴퍼니가<br>하는 일</h2>
   <div class="svc-grid">
     <div class="svc-card reveal">
       <div><div class="svc-name">네이버 블로그 대행</div><div class="svc-desc">키워드 분석 · 콘텐츠 제작 · 상위 노출</div></div>
@@ -430,6 +430,60 @@ const cObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.4 });
 document.querySelectorAll('.hero').forEach(el => cObs.observe(el));
+
+// Typewriter
+(function() {
+  const el = document.getElementById('heroTitle');
+  if (!el) return;
+  const phrases = [
+    { text: "광고대행사의 본질은\n클라이언트의 매출 증가,\n그것이 전부입니다.", hilight: "클라이언트의 매출 증가," },
+    { text: "광고비 말고\n매출을 만듭니다.", hilight: "매출을 만듭니다." },
+    { text: "검색 첫 화면을\n점령합니다.", hilight: "점령합니다." }
+  ];
+  let pi = 0, ci = 0, typing = true;
+  const TYPE_SPEED = 55, ERASE_SPEED = 28, PAUSE = 2200;
+
+  function render(text, phrase) {
+    const raw = phrase.text.substring(0, text.length);
+    const hi = phrase.hilight;
+    const idx = raw.indexOf(hi.substring(0, Math.min(hi.length, raw.length - raw.lastIndexOf(hi[0]))));
+    // simple: color the hilight substring if fully typed
+    let html;
+    if (raw.includes(hi)) {
+      html = raw.replace(hi, `<em style="color:var(--teal);font-style:normal">${hi}</em>`);
+    } else {
+      html = raw;
+    }
+    html = html.replace(/\n/g, '<br>');
+    el.innerHTML = html + '<span class="cursor"></span>';
+  }
+
+  function tick() {
+    const phrase = phrases[pi];
+    const full = phrase.text;
+    if (typing) {
+      ci++;
+      render(full.substring(0, ci), phrase);
+      if (ci >= full.length) {
+        typing = false;
+        setTimeout(tick, PAUSE);
+        return;
+      }
+      setTimeout(tick, TYPE_SPEED);
+    } else {
+      ci--;
+      render(full.substring(0, ci), phrase);
+      if (ci <= 0) {
+        typing = true;
+        pi = (pi + 1) % phrases.length;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, ERASE_SPEED);
+    }
+  }
+  setTimeout(tick, 600);
+})();
 </script>
 </body>
 </html>
