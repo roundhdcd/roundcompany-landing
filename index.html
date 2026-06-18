@@ -20,6 +20,10 @@ body{font-family:Pretendard,sans-serif;background:var(--bg);color:var(--white);l
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+.bubble-card.reveal{opacity:0;transform:translateY(52px) scale(.96);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.bubble-card.reveal.visible{opacity:1;transform:translateY(0) scale(1)}
+.bubble-card.reveal.d1{transition-delay:.32s}
+.bubble-card.reveal.d2{transition-delay:.64s}
 
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
@@ -32,7 +36,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 28px;display:fl
 .btn-nav:hover{opacity:.85}
 
 /* ─── PAGE 1: HERO ─── */
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:150px 32px 80px;max-width:680px;margin:0 auto}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;padding:110px 32px 80px;max-width:680px;margin:0 auto}
 .hero-title{font-size:clamp(34px,7vw,60px);font-weight:900;line-height:1.15;letter-spacing:-.04em;margin-bottom:56px;white-space:pre-line;min-height:3.6em}
 .hero-title em{color:var(--teal);font-style:normal}
 .cursor{display:inline-block;width:3px;height:1em;background:var(--teal);vertical-align:text-bottom;animation:blink .65s step-end infinite;margin-left:2px}
@@ -107,6 +111,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 28px;display:fl
 .case-headline{font-size:clamp(22px,4vw,32px);font-weight:900;line-height:1.3;letter-spacing:-.035em;margin-bottom:22px}
 .case-headline del{opacity:.4;text-decoration-color:rgba(255,255,255,.25)}
 .case-headline strong{color:var(--lime)}
+.cn-from{opacity:.4;position:relative;display:inline-block}
+.cn-from::after{content:'';position:absolute;left:0;right:0;top:52%;height:2px;background:rgba(255,255,255,.35)}
+.cn-to{color:var(--lime);display:inline-block}
 .case-quote{font-size:16px;color:var(--gray2);line-height:1.85;padding-top:20px;border-top:1px solid var(--border)}
 .case-quote::before{content:"❝  ";color:var(--teal)}
 
@@ -228,7 +235,7 @@ footer a{color:var(--gray2);text-decoration:none}
       <div class="kakao-card">
         <div class="kakao-chat">
           <div class="kakao-row-msg">
-            <div class="kakao-av">🏪</div>
+            <div class="kakao-av"></div>
             <div class="kakao-bub-wrap">
               <div class="kakao-bubble">저번달에 5천찍었습니다 ㅎㅎ ㅠㅠ 약소하지만 감사해서 뭐라도 드리고 싶어서요 ㅎㅎ 진심으로 감사드립니다😊</div>
               <div class="kakao-time">오후 2:14</div>
@@ -241,7 +248,7 @@ footer a{color:var(--gray2);text-decoration:none}
       <div class="kakao-card">
         <div class="kakao-chat">
           <div class="kakao-row-msg">
-            <div class="kakao-av">🍽️</div>
+            <div class="kakao-av"></div>
             <div class="kakao-bub-wrap">
               <div class="kakao-bubble">토요일 매출이 엄청 눈에 띄게 늘었어요!! 140 정도 했는데 200 왔다갔다 하네요 바빠지게 해주셔서 감사합니다 ㅠㅠ</div>
               <div class="kakao-time">오전 11:30</div>
@@ -254,7 +261,7 @@ footer a{color:var(--gray2);text-decoration:none}
       <div class="kakao-card">
         <div class="kakao-chat">
           <div class="kakao-row-msg">
-            <div class="kakao-av">🍖</div>
+            <div class="kakao-av"></div>
             <div class="kakao-bub-wrap">
               <div class="kakao-bubble">저번달 매출 20년만에 처음으로 4100찍었네요 ㅠㅠ 진짜 감사합니다. 앞으로도 잘 부탁드립니다</div>
               <div class="kakao-time">오전 10:45</div>
@@ -267,7 +274,7 @@ footer a{color:var(--gray2);text-decoration:none}
       <div class="kakao-card">
         <div class="kakao-chat">
           <div class="kakao-row-msg">
-            <div class="kakao-av">☕</div>
+            <div class="kakao-av"></div>
             <div class="kakao-bub-wrap">
               <div class="kakao-bubble">카페에 노출되어서 그런지 매출이 올랐습니다 ;)👍 인플루언서 콘텐츠도 순위가 변동됐네요</div>
               <div class="kakao-time">오후 4:52</div>
@@ -280,7 +287,7 @@ footer a{color:var(--gray2);text-decoration:none}
       <div class="kakao-card">
         <div class="kakao-chat">
           <div class="kakao-row-msg">
-            <div class="kakao-av">🔧</div>
+            <div class="kakao-av"></div>
             <div class="kakao-bub-wrap">
               <div class="kakao-bubble">오늘 문의 들어와서 설치까지 진행하네 감사합니다 ㅠㅠ 충남에서는 1등업체로 만들어보겠습니다!</div>
               <div class="kakao-time">오후 1:08</div>
@@ -293,7 +300,7 @@ footer a{color:var(--gray2);text-decoration:none}
       <div class="kakao-card">
         <div class="kakao-chat">
           <div class="kakao-row-msg">
-            <div class="kakao-av">🤝</div>
+            <div class="kakao-av"></div>
             <div class="kakao-bub-wrap">
               <div class="kakao-bubble">다음에 재개하시면 1순위로 말씀해주세요. 단가 최대한 맞춰보려고 하니 꼭 연락 주세요</div>
               <div class="kakao-time">오후 3:20</div>
@@ -338,19 +345,19 @@ footer a{color:var(--gray2);text-decoration:none}
     <div class="sec-label reveal">실제 사례</div>
     <h2 class="sec-title reveal d1">숫자로 증명합니다</h2>
     <div class="case-grid">
-      <div class="case-card reveal">
+      <div class="case-card reveal" data-from="12" data-from-unit="위" data-to="1" data-to-unit="위">
         <div class="case-tag">대전 맛집 · 네이버 플레이스</div>
-        <div class="case-headline">플레이스 <del>12위</del> → <strong>1위</strong><br>12일 만에 달성</div>
+        <div class="case-headline">플레이스 <span class="cn-from">12위</span> → <span class="cn-to">1위</span><br>12일 만에 달성</div>
         <div class="case-quote">광고비만 쓰다가 3년이 지났어요. 라운드컴퍼니 만나고 나서야 문제가 뭔지 알았습니다.</div>
       </div>
-      <div class="case-card reveal d1">
+      <div class="case-card reveal d1" data-from="18" data-from-unit="명" data-to="115" data-to-unit="명">
         <div class="case-tag">내과의원 · 블로그+플레이스</div>
-        <div class="case-headline">신규 예약 <del>18명</del> → <strong>115명</strong>/월<br>대행 3개월 기준</div>
+        <div class="case-headline">신규 예약 <span class="cn-from">18명</span> → <span class="cn-to">115명</span>/월<br>대행 3개월 기준</div>
         <div class="case-quote">검색에서 계속 밀리다가 이제 직접 찾아오는 환자가 생겼습니다.</div>
       </div>
-      <div class="case-card reveal d2">
+      <div class="case-card reveal d2" data-from="7" data-from-unit="명" data-to="145" data-to-unit="명">
         <div class="case-tag">피부관리샵 · 당근+SNS</div>
-        <div class="case-headline">신규 예약 <del>7명</del> → <strong>145명</strong>/월</div>
+        <div class="case-headline">신규 예약 <span class="cn-from">7명</span> → <span class="cn-to">145명</span>/월</div>
         <div class="case-quote">예약이 꽉 차기 시작했어요. 이사님 덕분입니다.</div>
       </div>
     </div>
@@ -393,7 +400,7 @@ footer a{color:var(--gray2);text-decoration:none}
 <!-- FOOTER -->
 <footer>
   <p>
-    ROUND COMPANY · 대전광역시<br>
+    ROUND COMPANY<br>
     <a href="https://roundcompany.kr" target="_blank">roundcompany.kr</a> · © 2025 Round Company. All rights reserved.
   </p>
 </footer>
@@ -483,6 +490,39 @@ document.querySelectorAll('.hero').forEach(el => cObs.observe(el));
     }
   }
   setTimeout(tick, 600);
+})();
+
+/* ── Case card counter animation ── */
+(function(){
+  function easeOut(t){return 1-Math.pow(1-t,3)}
+  function animateCounter(el, from, to, unit, duration){
+    const start = performance.now();
+    function frame(now){
+      const t = Math.min((now-start)/duration,1);
+      const val = Math.round(from + (to-from)*easeOut(t));
+      el.textContent = val + unit;
+      if(t<1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  const caseCards = document.querySelectorAll('.case-card[data-from]');
+  const obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting) return;
+      const card = entry.target;
+      const from = parseInt(card.dataset.from);
+      const fromUnit = card.dataset.fromUnit;
+      const to = parseInt(card.dataset.to);
+      const toUnit = card.dataset.toUnit;
+      const elFrom = card.querySelector('.cn-from');
+      const elTo = card.querySelector('.cn-to');
+      const duration = Math.min(1200, 600 + (to-from)*4);
+      animateCounter(elFrom, from, from, fromUnit, duration);
+      animateCounter(elTo, 0, to, toUnit, duration);
+      obs.unobserve(card);
+    });
+  },{threshold:0.4});
+  caseCards.forEach(function(c){obs.observe(c);});
 })();
 </script>
 </body>
