@@ -132,6 +132,26 @@ footer{padding:44px 28px;border-top:1px solid rgba(255,255,255,.05);text-align:c
 footer p{font-size:13px;color:var(--gray);line-height:2}
 footer a{color:var(--gray2);text-decoration:none}
 
+/* KAKAO REVIEW */
+.kakao-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -28px;padding:0 28px 16px}
+.kakao-scroll::-webkit-scrollbar{display:none}
+.kakao-row{display:flex;gap:16px;width:max-content}
+.kakao-card{width:290px;flex-shrink:0;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.kakao-topbar{background:#1c2f4a;padding:11px 16px;display:flex;align-items:center;justify-content:center;gap:6px}
+.kakao-topbar span{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.02em}
+.kakao-topbar strong{font-size:13px;color:#fff;font-weight:700}
+.kakao-chat{background:#b9ccd8;padding:14px 12px;display:flex;flex-direction:column;gap:10px}
+.kakao-row-msg{display:flex;gap:8px;align-items:flex-start}
+.kakao-av{width:36px;height:36px;border-radius:50%;background:#e8e8e8;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.kakao-bub-wrap{display:flex;align-items:flex-end;gap:4px}
+.kakao-bubble{background:#fff;border-radius:4px 14px 14px 14px;padding:10px 13px;font-size:13px;line-height:1.65;color:#111;max-width:190px;word-break:keep-all}
+.kakao-time{font-size:10px;color:rgba(0,0,0,.4);flex-shrink:0;padding-bottom:2px}
+.kakao-footer-bar{background:#1c2f4a;padding:10px 16px;text-align:center}
+.kakao-footer-bar span{font-size:11px;color:rgba(255,255,255,.4)}
+/* COUNTER GRAPH */
+.sb-graph{margin-top:32px;opacity:.6}
+.graph-path{stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1)}
+.graph-path.drawn{stroke-dashoffset:0}
 /* FLOAT */
 .float-btn{position:fixed;bottom:28px;right:28px;width:54px;height:54px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 8px 24px rgba(0,102,255,.45);z-index:99;text-decoration:none;transition:transform .2s}
 .float-btn:hover{transform:scale(1.1)}
@@ -156,9 +176,6 @@ footer a{color:var(--gray2);text-decoration:none}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow reveal">
-    <span class="hero-live"></span>라운드컴퍼니
-  </div>
   <h1 class="hero-title reveal d1">
     광고대행사의 본질은<br>
     <em>클라이언트의 매출 증가,</em><br>
@@ -208,8 +225,7 @@ footer a{color:var(--gray2);text-decoration:none}
     그 어디에도 없었죠.
   </p>
   <p class="story-body reveal d1">
-    광고비를 써도 문의가 없고, 블로그를 올려도 효과가 없다면 —<br>
-    전략이 없는 것입니다.
+    광고비를 써도 문의가 없고,<br>블로그를 올려도 효과가 없다면<br>전략이 없는 것입니다.
   </p>
 </section>
 
@@ -241,9 +257,26 @@ footer a{color:var(--gray2);text-decoration:none}
 <!-- STATS BAND -->
 <div class="stats-band">
   <div class="sb-inner">
-    <div class="reveal"><div class="sb-num">200+</div><div class="sb-lbl">누적 고객</div></div>
-    <div class="reveal d1"><div class="sb-num">92%</div><div class="sb-lbl">재계약률</div></div>
-    <div class="reveal d2"><div class="sb-num">7년+</div><div class="sb-lbl">운영 경력</div></div>
+    <div class="reveal"><div class="sb-num"><span class="counter" data-target="200" data-suffix="+">0</span></div><div class="sb-lbl">누적 고객</div></div>
+    <div class="reveal d1"><div class="sb-num"><span class="counter" data-target="92" data-suffix="%">0</span></div><div class="sb-lbl">재계약률</div></div>
+    <div class="reveal d2"><div class="sb-num"><span class="counter" data-target="7" data-suffix="년+">0</span></div><div class="sb-lbl">운영 경력</div></div>
+  </div>
+  <div class="sb-graph reveal d3">
+    <svg viewBox="0 0 320 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:0 auto">
+      <defs>
+        <linearGradient id="gfill" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#0066FF" stop-opacity=".15"/>
+          <stop offset="100%" stop-color="#B8F000" stop-opacity=".25"/>
+        </linearGradient>
+        <linearGradient id="gline" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#0066FF"/>
+          <stop offset="100%" stop-color="#B8F000"/>
+        </linearGradient>
+      </defs>
+      <path d="M0 55 C40 54,70 50,100 42 C130 34,150 24,190 16 C220 10,260 5,320 2 L320 60 L0 60 Z" fill="url(#gfill)"/>
+      <path class="graph-path" d="M0 55 C40 54,70 50,100 42 C130 34,150 24,190 16 C220 10,260 5,320 2" fill="none" stroke="url(#gline)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle class="graph-dot" cx="320" cy="2" r="4" fill="#B8F000"/>
+    </svg>
   </div>
 </div>
 
@@ -278,56 +311,94 @@ footer a{color:var(--gray2);text-decoration:none}
     <div class="sec-label reveal">고객 후기</div>
     <h2 class="sec-title reveal d1">함께한 고객들의<br>이야기입니다</h2>
   </div>
-  <div class="rc-scroll-wrap reveal d1">
-    <div class="rc-row">
-      <div class="rc-card">
-        <div class="rc-stars">★ ★ ★ ★ ★</div>
-        <div class="rc-text">저번달에 5천찍었습니다 ㅎㅎ ㅠㅠ 약소하지만 감사해서 뭐라도 드리고 싶어서요. 진심으로 감사드립니다.</div>
-        <div class="rc-meta">음식점 · 블로그+플레이스 대행</div>
+  <!-- Kakao style scroll -->
+  <div class="kakao-scroll reveal d1">
+    <div class="kakao-row">
+
+      <div class="kakao-card">
+        <div class="kakao-topbar"><strong>라운드컴퍼니 이사님</strong><span>카카오톡</span></div>
+        <div class="kakao-chat">
+          <div class="kakao-row-msg">
+            <div class="kakao-av">🏪</div>
+            <div class="kakao-bub-wrap">
+              <div class="kakao-bubble">저번달에 5천찍었습니다 ㅎㅎ ㅠㅠ 약소하지만 감사해서 뭐라도 드리고 싶어서요 ㅎㅎ 진심으로 감사드립니다😊</div>
+              <div class="kakao-time">오후 2:14</div>
+            </div>
+          </div>
+        </div>
+        <div class="kakao-footer-bar"><span>음식점 · 블로그+플레이스 대행</span></div>
       </div>
-      <div class="rc-card">
-        <div class="rc-stars">★ ★ ★ ★ ★</div>
-        <div class="rc-text">토요일 매출이 엄청 눈에 띄게 늘었어요!! 140 정도 했는데 200 왔다갔다 하네요. 바빠지게 해주셔서 감사합니다 ㅠㅠ</div>
-        <div class="rc-meta">음식점 · 플레이스 대행</div>
+
+      <div class="kakao-card">
+        <div class="kakao-topbar"><strong>라운드컴퍼니 이사님</strong><span>카카오톡</span></div>
+        <div class="kakao-chat">
+          <div class="kakao-row-msg">
+            <div class="kakao-av">🍽️</div>
+            <div class="kakao-bub-wrap">
+              <div class="kakao-bubble">토요일 매출이 엄청 눈에 띄게 늘었어요!! 140 정도 했는데 200 왔다갔다 하네요 바빠지게 해주셔서 감사합니다 ㅠㅠ</div>
+              <div class="kakao-time">오전 11:30</div>
+            </div>
+          </div>
+        </div>
+        <div class="kakao-footer-bar"><span>음식점 · 플레이스 대행</span></div>
       </div>
-      <div class="rc-card">
-        <div class="rc-stars">★ ★ ★ ★ ★</div>
-        <div class="rc-text">카페에 노출되어서 그런지 매출이 올랐습니다 :) 인플루언서 콘텐츠도 카페/플레이스 순위가 변동됐네요.</div>
-        <div class="rc-meta">카페 · 블로그 대행</div>
+
+      <div class="kakao-card">
+        <div class="kakao-topbar"><strong>라운드컴퍼니 이사님</strong><span>카카오톡</span></div>
+        <div class="kakao-chat">
+          <div class="kakao-row-msg">
+            <div class="kakao-av">☕</div>
+            <div class="kakao-bub-wrap">
+              <div class="kakao-bubble">카페에 노출되어서 그런지 매출이 올랐습니다 ;)👍 인플루언서 콘텐츠도 순위가 변동됐네요</div>
+              <div class="kakao-time">오후 4:52</div>
+            </div>
+          </div>
+        </div>
+        <div class="kakao-footer-bar"><span>카페 · 블로그 대행</span></div>
       </div>
-      <div class="rc-card">
-        <div class="rc-stars">★ ★ ★ ★ ★</div>
-        <div class="rc-text">오늘 문의 들어와서 설치까지 진행하네 이사님 감사합니다 ㅠㅠ 충남에서는 1등업체로 만들어보겠습니다!</div>
-        <div class="rc-meta">지역 업체 · 플레이스+블로그 대행</div>
+
+      <div class="kakao-card">
+        <div class="kakao-topbar"><strong>라운드컴퍼니 이사님</strong><span>카카오톡</span></div>
+        <div class="kakao-chat">
+          <div class="kakao-row-msg">
+            <div class="kakao-av">🔧</div>
+            <div class="kakao-bub-wrap">
+              <div class="kakao-bubble">오늘 문의 들어와서 설치까지 진행하네 이사님 감사합니다 ㅠㅠ 충남에서는 1등업체로 만들어보겠습니다!</div>
+              <div class="kakao-time">오후 1:08</div>
+            </div>
+          </div>
+        </div>
+        <div class="kakao-footer-bar"><span>지역 업체 · 플레이스+블로그 대행</span></div>
       </div>
-      <div class="rc-card">
-        <div class="rc-stars">★ ★ ★ ★ ★</div>
-        <div class="rc-text">다음에 재개하시면 1순위로 말씀해주세요. 재개되면 꼭 연락 주세요.</div>
-        <div class="rc-meta">재계약 고객 · 플레이스 대행</div>
+
+      <div class="kakao-card">
+        <div class="kakao-topbar"><strong>라운드컴퍼니 이사님</strong><span>카카오톡</span></div>
+        <div class="kakao-chat">
+          <div class="kakao-row-msg">
+            <div class="kakao-av">🤝</div>
+            <div class="kakao-bub-wrap">
+              <div class="kakao-bubble">다음에 재개하시면 1순위로 말씀해주세요. 단가 최대한 맞춰보려고 하니 꼭 연락 주세요</div>
+              <div class="kakao-time">오후 3:20</div>
+            </div>
+          </div>
+        </div>
+        <div class="kakao-footer-bar"><span>재계약 고객 · 플레이스 대행</span></div>
       </div>
-    </div>
-  </div>
-  <div class="rdark-grid" style="max-width:700px;margin:40px auto 0">
-    <div class="rdark-card reveal">
-      <div class="rdark-stars">★ ★ ★ ★ ★</div>
-      <div class="rdark-text">저번달 매출 20년만에 처음으로 4100찍었네요 ㅠㅠ 진짜 감사합니다 이사님. 앞으로도 잘 부탁드립니다.</div>
-      <div class="rdark-divider"></div>
-      <div class="rdark-name">A 음식점</div>
-      <div class="rdark-type">블로그 + 플레이스 + 당근 대행</div>
-    </div>
-    <div class="rdark-card reveal d1">
-      <div class="rdark-stars">★ ★ ★ ★ ★</div>
-      <div class="rdark-text">토요일 매출이 엄청 눈에 띄게 늘었어요!! 140 정도 했는데 200 왔다갔다 하네요. 바빠지게 해주셔서 감사합니다.</div>
-      <div class="rdark-divider"></div>
-      <div class="rdark-name">B 음식점</div>
-      <div class="rdark-type">플레이스 대행</div>
-    </div>
-    <div class="rdark-card reveal d2">
-      <div class="rdark-stars">★ ★ ★ ★ ★</div>
-      <div class="rdark-text">카페에 노출되어서 그런지 매출이 올랐습니다 :) 인플루언서 콘텐츠도 카페/플레이스 순위가 변동됐네요.</div>
-      <div class="rdark-divider"></div>
-      <div class="rdark-name">C 카페</div>
-      <div class="rdark-type">블로그 대행</div>
+
+      <div class="kakao-card">
+        <div class="kakao-topbar"><strong>라운드컴퍼니 이사님</strong><span>카카오톡</span></div>
+        <div class="kakao-chat">
+          <div class="kakao-row-msg">
+            <div class="kakao-av">🍖</div>
+            <div class="kakao-bub-wrap">
+              <div class="kakao-bubble">저번달 매출 20년만에 처음으로 4100찍었네요 ㅠㅠ 진짜 감사합니다 이사님. 앞으로도 잘 부탁드립니다</div>
+              <div class="kakao-time">오전 10:45</div>
+            </div>
+          </div>
+        </div>
+        <div class="kakao-footer-bar"><span>음식점 · 블로그+플레이스+당근 대행</span></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -377,10 +448,41 @@ footer a{color:var(--gray2);text-decoration:none}
 <a href="https://open.kakao.com/o/roundco" target="_blank" class="float-btn" title="카카오톡 무료 진단">💬</a>
 
 <script>
+// Reveal animation
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') });
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Trigger graph draw
+      e.target.querySelectorAll('.graph-path').forEach(p => p.classList.add('drawn'));
+    }
+  });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Counter animation
+function animateCounter(el) {
+  const target = +el.dataset.target;
+  const suffix = el.dataset.suffix || '';
+  const duration = 1400;
+  const start = performance.now();
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    el.textContent = Math.floor(easeOut(progress) * target) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.counter').forEach(animateCounter);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.stats-band').forEach(el => counterObs.observe(el));
 </script>
 </body>
 </html>
